@@ -60,25 +60,11 @@ public class Main02 implements GLEventListener, KeyListener {
 		gl.glFlush();
 	}
 
-	public void keyPressed(KeyEvent e) {
-		System.out.println(" --- keyPressed ---");
-		switch (e.getKeyCode()) {
-		}
-	}
-
 	public void reshape(GLAutoDrawable drawable, int x, int y, int width, int height) {
 		System.out.println(" --- reshape ---");
 		gl.glMatrixMode(GL.GL_PROJECTION);
 		gl.glLoadIdentity();
 		gl.glViewport(0, 0, width, height);
-	}
-
-	public void displayChanged(GLAutoDrawable arg0, boolean arg1, boolean arg2) {
-		System.out.println(" --- displayChanged ---");
-	}
-
-	public void keyReleased(KeyEvent arg0) {
-		System.out.println(" --- keyReleased ---");
 	}
 
 	public void keyTyped(KeyEvent arg0) {
@@ -113,7 +99,7 @@ public class Main02 implements GLEventListener, KeyListener {
 				right -= 10;
 				left -= 10;
 			} else {
-				System.out.println("limite direita");
+				System.err.println("limite direita");
 			}
 			glDrawable.display();
 			break;
@@ -164,5 +150,17 @@ public class Main02 implements GLEventListener, KeyListener {
 		gl.glVertex2f(0.0f, -200.0f);
 		gl.glVertex2f(0.0f, 200.0f);
 		gl.glEnd();
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+	}
+
+	@Override
+	public void displayChanged(GLAutoDrawable arg0, boolean arg1, boolean arg2) {
 	}
 }
