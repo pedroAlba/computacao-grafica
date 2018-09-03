@@ -1,4 +1,4 @@
-package questao04;
+package questao05;
 /// \file frame.java
 /// \brief Exemplo_N2_Jogl_Eclipse: desenha uma linha na diagonal.
 /// \version $Revision: 1.0 $
@@ -13,15 +13,15 @@ import javax.media.opengl.GLCapabilities;
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 
-public class Frame04 extends JFrame{
+public class Frame05 extends JFrame{
 
 	private static final long serialVersionUID = 1L;
-	private Main04 renderer = new Main04();
+	private Main05 renderer = new Main05();
 	
 	private int janelaLargura  = 400, janelaAltura = 400;
 
 	
-	public Frame04() {		
+	public Frame05() {		
 		// Cria o frame.
 		super("CG-N2_BemVindo");   
 		setBounds(300,250,416,439);  // 400 + 22 da borda do titulo da janela
@@ -48,7 +48,7 @@ public class Frame04 extends JFrame{
 	}		
 	
 	public static void main(String[] args) {
-		new Frame04().setVisible(true);
+		new Frame05().setVisible(true);
 	}
 	
 }

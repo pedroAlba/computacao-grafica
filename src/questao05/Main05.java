@@ -1,4 +1,4 @@
-package questao04;
+package questao05;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -9,7 +9,7 @@ import javax.media.opengl.GLAutoDrawable;
 import javax.media.opengl.GLEventListener;
 import javax.media.opengl.glu.GLU;
 
-public class Main04 implements GLEventListener, KeyListener {
+public class Main05 implements GLEventListener, KeyListener {
 	
 	private GL gl;
 	private GLU glu;
