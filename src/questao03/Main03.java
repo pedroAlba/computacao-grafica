@@ -180,11 +180,11 @@ public class Main03 implements GLEventListener, KeyListener {
 
 	public void circle(double posicaoX, double posicaoY, int qtdPontos, double raio) {
 		int angulo = 360 / qtdPontos;
+		gl.glColor3f(0, 0, 255);
+		gl.glLineWidth(1.0f);
+		gl.glPointSize(3.0f);
 		gl.glBegin(GL.GL_LINE_LOOP);
 		for (int i = 0; i < 360;) {
-			gl.glColor3f(0, 0, 255);
-			gl.glLineWidth(1.0f);
-			gl.glPointSize(3.0f);
 			gl.glVertex2d(getX(i, raio) + posicaoX, getY(i, raio) + posicaoY);
 			i = i + angulo;
 		}
