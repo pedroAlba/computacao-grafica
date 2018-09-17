@@ -13,12 +13,22 @@ public class Main04 implements GLEventListener, KeyListener {
 
 	private GL gl;
 	private GLU glu;
+	private GLU glu2;
 	private GLAutoDrawable glDrawable;
 
 	private int left = -400;
 	private int right = 400;
 	private int top = 400;
 	private int bottom = -400;
+	private double auxLeftAngulo = 45.0;
+	private double auxLeftRaio = 100.0;
+	private double auxRightAngulo = 45.0;
+	private double auxRightRaio = -100.0;
+	private double variavelX = getX(45.0, 100.0);
+	private double variavelY = getY(45.0, -100.0);
+	private float top2 = 0;
+	private float bottom2 = 0;
+	
 
 	public void init(GLAutoDrawable drawable) {
 		System.out.println(" --- init ---");
@@ -37,39 +47,27 @@ public class Main04 implements GLEventListener, KeyListener {
 		gl.glMatrixMode(GL.GL_MODELVIEW);
 		gl.glLoadIdentity();
 		glu.gluOrtho2D(left, right, top, bottom);
+		
 
 		SRU();
 
-		gl.glColor3f(0, 0, 0);
+		/*gl.glColor3f(0, 0, 0);
 		gl.glLineWidth(1.0f);
 		gl.glPointSize(10.0f);
 		gl.glBegin(GL.GL_POINTS);
 		gl.glVertex2d(0, 0);
-		gl.glEnd();
+		gl.glEnd();*/
 
-		circle(-100, -100, 360, 100);
-		circle(100, -100, 360, 100);
-		circle(0, 100, 360, 100);
-		
-		gl.glColor3f(0, 255, 0);
-		
-		gl.glLineWidth(1.0f);
-		gl.glBegin(GL.GL_LINES);
-		gl.glVertex2d(-100, -100);
-		gl.glVertex2d(100, -100);
-		gl.glEnd();
-		
-		gl.glLineWidth(1.0f);
-		gl.glBegin(GL.GL_LINES);
-		gl.glVertex2d(100, -100);
-		gl.glVertex2d(0, 100);
-		gl.glEnd();
-		
-		gl.glLineWidth(1.0f);
-		gl.glBegin(GL.GL_LINES);
-		gl.glVertex2d(0, 100);
-		gl.glVertex2d(-100, -100);
-		gl.glEnd();
+
+		/*for (int i = 0; i < 360;) {
+			gl.glColor3f(0, 0, 255);
+			gl.glLineWidth(1.0f);
+			gl.glPointSize(3.0f);
+			gl.glBegin(GL.GL_POINTS);
+			gl.glVertex2d(getX(i, 100), getY(i, 100));
+			gl.glEnd();
+			i = i + 5;
+		}*/
 
 		gl.glFlush();
 	}
@@ -138,6 +136,83 @@ public class Main04 implements GLEventListener, KeyListener {
 
 			glDrawable.display();
 			break;
+		case 'q':
+			System.out.println(left);
+			//System.out.println(varGetX);
+			//System.out.println(varGetY);
+			if (left < -200) {
+				top2 -= 10;
+				variavelX -= 10;
+			} else {
+				System.err.println("limite questao 4");
+			}
+
+			glDrawable.display();
+			break;
+		case 'w':
+			if (top < 600) {
+				top2 += 10;
+				variavelX += 10;
+			} else {
+				System.out.println("limite cima");
+			}
+
+			glDrawable.display();
+			break;
+		case 'z':
+			if (top < 600) {
+				auxLeftAngulo += 10;
+				//auxLeftRaio += 10;
+				auxRightAngulo += 10;
+				variavelX = getX(auxLeftAngulo, auxLeftRaio);
+				variavelY = getY(auxRightAngulo, auxRightRaio);
+				//bottom += 10;
+			} else {
+				System.out.println("limite cima");
+			}
+
+			glDrawable.display();
+			break;
+		case 'x':
+			if (top < 600) {
+				auxLeftAngulo -= 10;
+				//auxLeftRaio += 10;
+				auxRightAngulo -= 10;
+				//auxLeftRaio = left2;
+				//auxRightRaio = right2;
+				
+				variavelX = getX(auxLeftAngulo, auxLeftRaio);
+				variavelY = getY(auxRightAngulo, auxRightRaio);
+			} else {
+				System.out.println("limite cima");
+			}
+
+			glDrawable.display();
+			break;
+		case 'a':
+			if (top < 600) {
+				auxLeftRaio -= 10;
+				auxRightRaio += 10;
+				variavelX = getX(auxLeftAngulo, auxLeftRaio);
+				variavelY = getY(auxRightAngulo, auxRightRaio);
+			} else {
+				System.out.println("limite cima");
+			}
+
+			glDrawable.display();
+			break;
+		case 's':
+			if (top < 600) {
+				auxLeftRaio += 10;
+				auxRightRaio -= 10;
+				variavelX = getX(auxLeftAngulo, auxLeftRaio);
+				variavelY = getY(auxRightAngulo, auxRightRaio);
+			} else {
+				System.out.println("limite cima");
+			}
+
+			glDrawable.display();
+			break;
 
 		default:
 			break;
@@ -164,6 +239,34 @@ public class Main04 implements GLEventListener, KeyListener {
 		gl.glVertex2f(0.0f, -200.0f);
 		gl.glVertex2f(0.0f, 200.0f);
 		gl.glEnd();
+		
+		gl.glColor3f(0.0f, 0, 0.0f);
+		gl.glBegin(GL.GL_LINES);
+		gl.glVertex2f(top2, bottom2);
+		//gl.glVertex2d(top2, bottom2);
+		gl.glVertex2d(variavelX, variavelY);
+		gl.glEnd();
+		
+		gl.glColor3f(0, 0, 0);
+		gl.glLineWidth(1.0f);
+		gl.glPointSize(5.0f);
+		gl.glBegin(GL.GL_POINTS);
+		gl.glVertex2d(top2, bottom2);
+		gl.glEnd();
+		
+		
+		
+		gl.glColor3f(0, 0, 0);
+		gl.glLineWidth(1.0f);
+		gl.glPointSize(5.0f);
+		gl.glBegin(GL.GL_POINTS);
+		gl.glVertex2d(variavelX, variavelY);
+		gl.glEnd();
+	
+	
+		
+
+
 	}
 
 	@Override
@@ -176,18 +279,5 @@ public class Main04 implements GLEventListener, KeyListener {
 
 	@Override
 	public void displayChanged(GLAutoDrawable arg0, boolean arg1, boolean arg2) {
-	}
-
-	public void circle(double posicaoX, double posicaoY, int qtdPontos, double raio) {
-		int angulo = 360 / qtdPontos;
-		gl.glBegin(GL.GL_LINE_LOOP);
-		for (int i = 0; i < 360;) {
-			gl.glColor3f(0, 0, 255);
-			gl.glLineWidth(1.0f);
-			gl.glPointSize(3.0f);
-			gl.glVertex2d(getX(i, raio) + posicaoX, getY(i, raio) + posicaoY);
-			i = i + angulo;
-		}
-		gl.glEnd();
 	}
 }
