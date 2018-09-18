@@ -34,9 +34,12 @@ public class Main07 implements GLEventListener, MouseListener, MouseMotionListen
 	private Point4D pto4 = new Point4D(getX(315, 150) + 200, getY(315, 150) - 200, 0.0, 1.0);
 	private BoundingBox bBox = new BoundingBox(pto1.GetX(),pto1.GetY(),pto1.GetZ(),pto1.GetX(),pto1.GetY(),pto1.GetZ());
 	
-	private float r = 1;
+	private float r = 255; 
 	private float g = 0;
-	private float b = 0;
+	private float b = 255;
+	
+	private float raioCirculoMaiorQuad = 150 * 150;
+	private boolean dentro = true;
 
 	public void init(GLAutoDrawable drawable) {
 		System.out.println(" --- init ---");
@@ -141,26 +144,43 @@ public class Main07 implements GLEventListener, MouseListener, MouseMotionListen
 	}
 
 	@Override
-	public void mouseDragged(MouseEvent e) {
-	    int movtoX = e.getX() - antigoX;
+	public void mouseDragged(MouseEvent e) {		
+		int movtoX = e.getX() - antigoX;
 	    int movtoY = e.getY() - antigoY;
-
-	    Dx += movtoX;
-	    Dy += movtoY;
-	    
+	
+		Dx += movtoX;
+		Dy += movtoY;
+		
 	    antigoX = e.getX();
 		antigoY = e.getY();
+		
+		atualizaCorBBox();
+		
+		if  (dentro) {
+			glDrawable.display();
+		} 
 
+		double d = Math.pow((Dx - bBox.obterCentro().GetX()),2) + Math.pow((Dy - bBox.obterCentro().GetY()),2);
+		System.out.println(d);
+		System.out.println(raioCirculoMaiorQuad);
+		if  (d < raioCirculoMaiorQuad) {
+			dentro = true;
+		} else {
+			dentro = false;
+		}
+	}
+	
+	public void atualizaCorBBox(){
 		if  (Dx <= bBox.obterMenorX() || Dx >= bBox.obterMaiorX() 
 			|| Dy <= bBox.obterMenorY() || Dy >= bBox.obterMaiorY()) {
-			r = 0;
-			g = 1;
+			r = 255;
+			g = 255;
+			b = 0;
 		} else {
-			r = 1;
+			r = 255; 
 			g = 0;
-		}
-		
-		glDrawable.display();
+			b = 255;
+		}	
 	}
 
 	@Override
@@ -195,7 +215,11 @@ public class Main07 implements GLEventListener, MouseListener, MouseMotionListen
 
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
+		if  (!dentro){
+			Dx = 200;
+			Dy = -200;	
+			atualizaCorBBox();
+			glDrawable.display();
+		}
 	}
 }
