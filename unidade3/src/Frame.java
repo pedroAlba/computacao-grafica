@@ -38,6 +38,7 @@ public class Frame extends JFrame{
 		add(canvas,BorderLayout.CENTER);
 		canvas.addGLEventListener(renderer);        
 		canvas.addKeyListener(renderer);
+		canvas.addMouseListener(renderer);
 		canvas.requestFocus();			
 	}		
 	

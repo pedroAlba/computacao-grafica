@@ -2,6 +2,8 @@
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.media.opengl.DebugGL;
 import javax.media.opengl.GL;
@@ -9,7 +11,7 @@ import javax.media.opengl.GLAutoDrawable;
 import javax.media.opengl.GLEventListener;
 import javax.media.opengl.glu.GLU;
 
-public class Main implements GLEventListener, KeyListener {
+public class Main implements GLEventListener, KeyListener, MouseListener {
 	
 	private GL gl;
 	private GLU glu;
@@ -31,7 +33,11 @@ public class Main implements GLEventListener, KeyListener {
 		gl.glMatrixMode(GL.GL_MODELVIEW);
 		gl.glLoadIdentity();
 		glu.gluOrtho2D(-400f, 400.0f, 400.0f, -400f);
-
+		//percorrer lista de objeto grafico, for, objeto.desenha
+		for(ObjetoGrafico o : Mundo.getInstance().getObjetos()) {
+			o.desenha(gl);
+			System.out.println("chamou desenha");
+		}
 	}
 
 	public void keyPressed(KeyEvent e) {
@@ -79,5 +85,36 @@ public class Main implements GLEventListener, KeyListener {
 		gl.glVertex2f(0.0f, -200.0f);
 		gl.glVertex2f(0.0f, 200.0f);
 		gl.glEnd();
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		System.out.println("clicou");
+		Mundo.getInstance().adicionaObjeto(e.getX(), e.getY());
+		Mundo.getInstance().adicionaObjeto(e.getX(), e.getY());
+		glDrawable.display();
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		Mundo.getInstance().alteraUltimo(e.getX(), e.getY());		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 }

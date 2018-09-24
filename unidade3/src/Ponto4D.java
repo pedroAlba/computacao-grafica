@@ -66,7 +66,4 @@ public final class Ponto4D {
 		this.w = w;
 	}
 	
-	
-
-	
 }
