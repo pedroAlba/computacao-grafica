@@ -1,5 +1,3 @@
-
-
 import java.awt.BorderLayout;
 
 import javax.media.opengl.GLCanvas;
