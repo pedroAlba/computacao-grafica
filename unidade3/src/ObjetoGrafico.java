@@ -15,10 +15,29 @@ public class ObjetoGrafico {
 	
 	void desenha(GL gl) {
 		
+		desenhaPontos(gl);
+		desenhaLinhas(gl);
+	}
+
+	private void desenhaLinhas(GL gl) {
+		
+		gl.glLineWidth(5.0f);
+		gl.glPointSize(5);
+		gl.glBegin(GL.GL_LINE_STRIP);
 		gl.glColor3f(0.0f, 0.0f, 0.0f);
-		gl.glLineWidth(50.0f);
+		
+		for (Ponto4D p : pontos) {
+			gl.glVertex2d(p.getX(), p.getY());
+			System.out.println("desenhou linha");
+		}
+		gl.glEnd();		
+	}
+
+	private void desenhaPontos(GL gl) {
+		gl.glLineWidth(5.0f);
 		gl.glPointSize(5);
 		gl.glBegin(GL.GL_POINTS);
+		gl.glColor3f(0.0f, 0.0f, 0.0f);
 		
 		for (Ponto4D p : pontos) {
 			gl.glVertex2d(p.getX(), p.getY());

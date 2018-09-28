@@ -12,9 +12,9 @@ import javax.media.opengl.glu.GLU;
 
 public class Main implements GLEventListener, KeyListener, MouseListener, MouseMotionListener {
 
-	private float minX = -400.0f;
+	private float minX = -400;
 	private float maxX = 400.0f;
-	private float minY = -400.0f;
+	private float minY = -400;
 	private float maxY = 400.0f;
 	private GL gl;
 	private GLU glu;
@@ -52,9 +52,7 @@ public class Main implements GLEventListener, KeyListener, MouseListener, MouseM
 
 	public void display(GLAutoDrawable arg0) {
 		gl.glClear(GL.GL_COLOR_BUFFER_BIT);
-		gl.glMatrixMode(GL.GL_PROJECTION);
-		gl.glLoadIdentity();
-		glu.gluOrtho2D(0, maxX, 0, maxY);
+		glu.gluOrtho2D(0, 400, 400, 0);
 		gl.glMatrixMode(GL.GL_MODELVIEW);
 		gl.glLoadIdentity();
 
@@ -63,7 +61,15 @@ public class Main implements GLEventListener, KeyListener, MouseListener, MouseM
 		Mundo.getInstance().getObjetos().forEach(o -> o.desenha(gl));
 		gl.glFlush();
 	}
-
+	
+	public void reshape(GLAutoDrawable drawable, int x, int y, int width, int height) {
+		System.out.println("width" + width);
+		System.out.println("height" + height);
+		System.out.println(" --- reshape ---");
+		gl.glMatrixMode(GL.GL_PROJECTION);
+		gl.glLoadIdentity();
+		gl.glViewport(0, 0, width, height);
+	}
 
 	private void move(float minX, float maxX, float minY, float maxY) {
 		
@@ -105,9 +111,6 @@ public class Main implements GLEventListener, KeyListener, MouseListener, MouseM
 		glDrawable.display();
 	}
 
-	public void reshape(GLAutoDrawable arg0, int arg1, int arg2, int arg3, int arg4) {
-	}
-
 	public void displayChanged(GLAutoDrawable arg0, boolean arg1, boolean arg2) {
 	}
 
@@ -143,12 +146,12 @@ public class Main implements GLEventListener, KeyListener, MouseListener, MouseM
 
 	@Override
 	public void mouseEntered(MouseEvent arg0) {
-		System.out.println(String.format("MouseEntered %s - %s", arg0.getX(), arg0.getY()));
+		//System.out.println(String.format("MouseEntered %s - %s", arg0.getX(), arg0.getY()));
 	}
 
 	@Override
 	public void mouseExited(MouseEvent arg0) {
-		System.out.println(String.format("Exited %s - %s", arg0.getX(), arg0.getY()));
+		//System.out.println(String.format("Exited %s - %s", arg0.getX(), arg0.getY()));
 	}
 
 	@Override
