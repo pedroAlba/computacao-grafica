@@ -36,9 +36,4 @@ public class Mundo {
 		}
 		this.objetos.get(this.objetos.size() -1).adicionarPonto(x, y,0,0);
 	}
-
-	public void alteraUltimo(int x, int y) {
-		if(! this.objetos.isEmpty())
-			this.objetos.get(this.objetos.size() - 1).alteraUltimoPonto(x,y);		
-	}
 }
