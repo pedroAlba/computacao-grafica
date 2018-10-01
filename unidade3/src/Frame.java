@@ -5,6 +5,10 @@ import javax.media.opengl.GLCapabilities;
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 
+/**
+ * Classe principal, que contem o frame para a aplicação gráfica
+ *
+ */
 public class Frame extends JFrame{
 
 	private static final long serialVersionUID = 1L;

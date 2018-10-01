@@ -1,5 +1,9 @@
 import javax.media.opengl.GL;
 
+/**
+ * Tem como objetivo representar uma BoundingBox.
+ * Contêm 6 valores de "bordas", tanto postivo como positivo
+ */
 public final class BoundingBox {
 	private double menorX;
 	private double menorY;
@@ -37,6 +41,12 @@ public final class BoundingBox {
 	    atualizarBBox(point.getX(), point.getY(), point.getZ());
 	}
 
+	/**
+	 * Atribui os novos valores a BBox, fazendo algumas validações de limite máximo / minimo
+	 * @param x novo valor de x
+	 * @param y novo valor de y
+	 * @param z novo valor de z
+	 */
 	public void atualizarBBox(double x, double y, double z) {
 	    if (x < menorX)
 	        menorX = x;
@@ -55,12 +65,19 @@ public final class BoundingBox {
 	    }
 	}
 	
+	/**
+	 * Calcula o centro, utilizando maior + menor / 2
+	 */
 	public void processarCentroBBox() {
 	    centro.setX((maiorX + menorX)/2);
 	    centro.setY((maiorY + menorY)/2);
 	    centro.setZ((maiorZ + menorZ)/2);
 	}
 
+	/**
+	 * Faz o desenho da BBox, com base nas propriedades já definidas na classe
+	 * @param gl
+	 */
 	public void desenharOpenGLBBox(GL gl) {
 		gl.glColor3f(1.0f, 0.0f, 0.0f);
 

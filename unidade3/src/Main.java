@@ -10,6 +10,11 @@ import javax.media.opengl.GLAutoDrawable;
 import javax.media.opengl.GLEventListener;
 import javax.media.opengl.glu.GLU;
 
+/**
+ * Classe destinada a fazer a interação com o usuário, delegando os eventos de mouse / teclado para as respectivas classes
+ *
+ */
+
 public class Main implements GLEventListener, KeyListener, MouseListener, MouseMotionListener {
 
 	private float minX = -400;

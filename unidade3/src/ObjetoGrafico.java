@@ -3,6 +3,10 @@ import java.util.List;
 
 import javax.media.opengl.GL;
 
+/**
+ * Classe que representa um ObjetoGrafico, armazena informações de todos os seus pontos, sua primitiva, boundingBox e cor.
+ *
+ */
 public class ObjetoGrafico {
 
 	private List<Ponto4D> pontos = new ArrayList<>();
@@ -17,6 +21,10 @@ public class ObjetoGrafico {
 		desenhaLinhas(gl);
 	}
 
+	/**
+	 * Itera sobre todos os pontos, e inicia um desenho na tela, com base na primitiva definida na variavel {@link primitiva}
+	 * @param gl
+	 */
 	private void desenhaLinhas(GL gl) {
 		gl.glLineWidth(2.0f);
 		//TODO: Transformar na variavel "primitiva"
@@ -39,7 +47,6 @@ public class ObjetoGrafico {
 	
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
 		return "Objeto Gráfico: " + pontos.toString() + "\n";
 	}
 }
