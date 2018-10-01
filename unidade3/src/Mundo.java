@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Objeto "global", unico para toda a aplicação, que mantem informação tanto de objetos tanto quanto da camera.
+ * Objeto singleton, único para toda a aplicação, que mantem informação tanto de objetos tanto quanto da camera.
  *
  */
 public class Mundo {
