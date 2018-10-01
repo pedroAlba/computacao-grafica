@@ -24,7 +24,6 @@ public class ObjetoGrafico {
 		
 		for (Ponto4D p : pontos) {
 			gl.glVertex2d(p.getX(), p.getY());
-			System.out.println("desenhou linha");
 		}
 		gl.glEnd();		
 	}

@@ -11,6 +11,7 @@ public class Mundo {
 	
 	private Mundo() {
 		this.camera = new Camera();
+		objetos.add(new ObjetoGrafico());
 	}
 	
 	public static Mundo getInstance() {
@@ -28,12 +29,6 @@ public class Mundo {
 	}
 	
 	void adicionarPonto(double x, double y) {
-		if(this.objetos.size() == 0) {
-			ObjetoGrafico o = new ObjetoGrafico();
-			o.adicionarPonto(x, y,0,0);
-			this.objetos.add(o);
-			return;
-		}
 		this.objetos.get(this.objetos.size() -1).adicionarPonto(x, y,0,0);
 	}
 	
