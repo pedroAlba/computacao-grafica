@@ -68,6 +68,6 @@ public final class Ponto4D {
 	
 	@Override
 	public String toString() {
-		return String.format("X: %s Y: %s", x, y);
+		return String.format("\nX: %s Y: %s", x, y);
 	}
 }
