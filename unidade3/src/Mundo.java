@@ -11,6 +11,9 @@ public class Mundo {
 	
 	private List<ObjetoGrafico> objetos = new ArrayList<ObjetoGrafico>();
 	
+	//TODO: Avaliar se é o local mais correto
+	private ObjetoGrafico objetoSelecionado;
+	
 	private Camera camera;
 	
 	private Mundo() {
@@ -42,7 +45,7 @@ public class Mundo {
 	}
 	
 	/**
-	 * Adiciona um novo objetoGrafico, sem nenhum ponto, ao final da lista
+	 * Adiciona um novo objetoGrafico ao final da lista
 	 */
 	void adicionarObjeto() {
 		ObjetoGrafico o = new ObjetoGrafico();		
