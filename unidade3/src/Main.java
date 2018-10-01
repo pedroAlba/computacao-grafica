@@ -22,7 +22,7 @@ public class Main implements GLEventListener, KeyListener, MouseListener, MouseM
 
 	private int x = 0;
 	private int y = 0;
-
+	
 	public void init(GLAutoDrawable drawable) {
 		System.out.println(" --- init ---");
 		glDrawable = drawable;
@@ -89,6 +89,8 @@ public class Main implements GLEventListener, KeyListener, MouseListener, MouseM
 
 	public void keyPressed(KeyEvent e) {
 		switch (e.getKeyChar()) {
+		case ' ':
+			Mundo.getInstance().adicionarObjeto();
 		case 'i':
 			move(50f, -50f, 50f, -50f);
 			break;
@@ -159,7 +161,7 @@ public class Main implements GLEventListener, KeyListener, MouseListener, MouseM
 		x = arg0.getX();
 		y = arg0.getY();
 		System.out.println(String.format("Pressed %s - %s", x,y));
-		Mundo.getInstance().adicionaObjeto(x, y);
+		Mundo.getInstance().adicionarPonto(x, y);
 		glDrawable.display();
 	}
 

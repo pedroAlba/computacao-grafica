@@ -19,7 +19,7 @@ public class ObjetoGrafico {
 
 	private void desenhaLinhas(GL gl) {
 		gl.glLineWidth(2.0f);
-		gl.glBegin(GL.GL_LINE_STRIP);
+		gl.glBegin(GL.GL_LINE_LOOP);
 		gl.glColor3f(0.0f, 0.0f, 0.0f);
 		
 		for (Ponto4D p : pontos) {

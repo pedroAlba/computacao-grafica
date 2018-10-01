@@ -27,7 +27,7 @@ public class Mundo {
 		return objetos;
 	}
 	
-	void adicionaObjeto(double x, double y) {
+	void adicionarPonto(double x, double y) {
 		if(this.objetos.size() == 0) {
 			ObjetoGrafico o = new ObjetoGrafico();
 			o.adicionarPonto(x, y,0,0);
@@ -35,5 +35,10 @@ public class Mundo {
 			return;
 		}
 		this.objetos.get(this.objetos.size() -1).adicionarPonto(x, y,0,0);
+	}
+	
+	void adicionarObjeto() {
+		ObjetoGrafico o = new ObjetoGrafico();		
+		this.objetos.add(o);
 	}
 }
