@@ -35,4 +35,10 @@ public class ObjetoGrafico {
 	public List<Ponto4D> getPontos() {
 		return pontos;
 	}
+	
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return "Objeto Gráfico: " + pontos.toString() + "\n";
+	}
 }

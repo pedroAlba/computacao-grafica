@@ -87,6 +87,10 @@ public class Main implements GLEventListener, KeyListener, MouseListener, MouseM
 	}
 
 	public void keyPressed(KeyEvent e) {
+		System.err.println(e.getKeyCode());
+		if(e.getKeyCode() == 120) {
+			System.out.println(Mundo.getInstance().getObjetos());
+		}
 		switch (e.getKeyChar()) {
 		case ' ':
 			Mundo.getInstance().adicionarObjeto();

@@ -66,4 +66,8 @@ public final class Ponto4D {
 		this.w = w;
 	}
 	
+	@Override
+	public String toString() {
+		return String.format("X: %s Y: %s", x, y);
+	}
 }
