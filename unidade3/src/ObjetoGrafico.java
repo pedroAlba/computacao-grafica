@@ -50,6 +50,9 @@ public class ObjetoGrafico {
 	}
 	
 	void adicionarPonto(double x, double y, double z, double w) {
+		if(pontos.isEmpty()) {
+			pontos.add(new Ponto4D(x, y, z, w));	
+		}
 		pontos.add(new Ponto4D(x, y, z, w));
 	}
 	

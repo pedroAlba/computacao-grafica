@@ -151,8 +151,8 @@ public class Main implements GLEventListener, KeyListener, MouseListener, MouseM
 	@Override
 	public void mousePressed(MouseEvent arg0) {
 		x = arg0.getX();
-		y = arg0.getY();
-		Mundo.getInstance().adicionarPonto(x, y);
+		y = arg0.getY();		
+		Mundo.getInstance().adicionarPonto(x, y);		
 		glDrawable.display();
 	}
 
