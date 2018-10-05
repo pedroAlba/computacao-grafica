@@ -32,6 +32,8 @@ public class Main implements GLEventListener, KeyListener, MouseListener, MouseM
 	
 	private Estado estado;
 	
+	private boolean poligonoAberto;
+	
 	public void init(GLAutoDrawable drawable) {
 		System.out.println(" --- init ---");
 		glDrawable = drawable;
@@ -52,8 +54,12 @@ public class Main implements GLEventListener, KeyListener, MouseListener, MouseM
 		gl.glMatrixMode(GL.GL_MODELVIEW);
 		gl.glLoadIdentity();
 
-		//SRU();
-
+		if(poligonoAberto) {
+			selecionado.setPrimitiva(GL.GL_LINE_STRIP);
+		} else {
+			selecionado.setPrimitiva(GL.GL_LINE_LOOP);
+		}
+			
 		Mundo.getInstance().getObjetos().forEach(o -> o.desenha(gl));
 		gl.glFlush();
 	}
@@ -85,14 +91,12 @@ public class Main implements GLEventListener, KeyListener, MouseListener, MouseM
 
 	public void keyPressed(KeyEvent e) {
 		
-		
 		if(e.getKeyCode() == 120) {
 			System.out.println(Mundo.getInstance().getObjetos());
 		}
 		
 		switch (e.getKeyChar()) {
 		case ' ':
-			selecionado.setPrimitiva(GL.GL_LINE_LOOP);
 			selecionado = Mundo.getInstance().adicionarObjeto();
 		case 'i':
 			move(50f, -50f, 50f, -50f);
@@ -112,7 +116,10 @@ public class Main implements GLEventListener, KeyListener, MouseListener, MouseM
 		case 'b':
 			move(0f, 0f, 50f, 50f);
 			break;
+		case 'p':
+			poligonoAberto = !poligonoAberto;
 		}
+		
 		glDrawable.display();
 	}
 
