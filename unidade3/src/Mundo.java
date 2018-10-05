@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.media.opengl.GL;
+
 /**
  * Objeto singleton, único para toda a aplicação, que mantem informação tanto de objetos tanto quanto da camera.
  *
@@ -18,7 +20,7 @@ public class Mundo {
 	
 	private Mundo() {
 		this.camera = new Camera();
-		objetos.add(new ObjetoGrafico());
+		objetos.add(new ObjetoGrafico(GL.GL_LINE_STRIP));
 	}
 	
 	public static Mundo getInstance() {
@@ -47,8 +49,9 @@ public class Mundo {
 	/**
 	 * Adiciona um novo objetoGrafico ao final da lista
 	 */
-	void adicionarObjeto() {
-		ObjetoGrafico o = new ObjetoGrafico();		
+	public ObjetoGrafico adicionarObjeto() {
+		ObjetoGrafico o = new ObjetoGrafico(GL.GL_LINE_STRIP);		
 		this.objetos.add(o);
+		return o;
 	}
 }

@@ -17,24 +17,36 @@ public class ObjetoGrafico {
 	
 	private String color;
 	
+	/**
+	 * Controle para ver se precisa desenhar o rastro
+	 */
+	private boolean desenhando = true;
+	
 	void desenha(GL gl) {
 		desenhaLinhas(gl);
 	}
 
+	public ObjetoGrafico(int primitiva) {
+		this.primitiva = primitiva;
+		this.bbox = new BoundingBox();
+	}
 	/**
 	 * Itera sobre todos os pontos, e inicia um desenho na tela, com base na primitiva definida na variavel {@link primitiva}
 	 * @param gl
 	 */
 	private void desenhaLinhas(GL gl) {
+		
 		gl.glLineWidth(2.0f);
-		//TODO: Transformar na variavel "primitiva"
-		gl.glBegin(GL.GL_LINE_LOOP);
+		
+		gl.glBegin(primitiva);
 		gl.glColor3f(0.0f, 0.0f, 0.0f);
 		
 		for (Ponto4D p : pontos) {
 			gl.glVertex2d(p.getX(), p.getY());
 		}
+		
 		gl.glEnd();		
+		
 	}
 	
 	void adicionarPonto(double x, double y, double z, double w) {
@@ -48,5 +60,9 @@ public class ObjetoGrafico {
 	@Override
 	public String toString() {
 		return "Objeto Gráfico: " + pontos.toString() + "\n";
+	}
+
+	public void setPrimitiva(int primitiva) {
+		this.primitiva = primitiva;
 	}
 }

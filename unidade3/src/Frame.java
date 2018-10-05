@@ -41,6 +41,7 @@ public class Frame extends JFrame{
 		canvas.addGLEventListener(renderer);        
 		canvas.addKeyListener(renderer);
 		canvas.addMouseListener(renderer);
+		canvas.addMouseMotionListener(renderer);	
 		canvas.requestFocus();			
 	}		
 	

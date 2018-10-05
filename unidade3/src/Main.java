@@ -28,6 +28,10 @@ public class Main implements GLEventListener, KeyListener, MouseListener, MouseM
 	private int x = 0;
 	private int y = 0;
 	
+	private ObjetoGrafico selecionado;
+	
+	private Estado estado;
+	
 	public void init(GLAutoDrawable drawable) {
 		System.out.println(" --- init ---");
 		glDrawable = drawable;
@@ -36,22 +40,10 @@ public class Main implements GLEventListener, KeyListener, MouseListener, MouseM
 		glDrawable.setGL(new DebugGL(gl));
 		System.out.println("Espaço de desenho com tamanho: " + drawable.getWidth() + " x " + drawable.getHeight());
 		gl.glClearColor(1f, 1f, 1f, 0f);
-	}
-
-	public void SRU() {
-
-		gl.glColor3f(1.0f, 0.0f, 0.0f);
-		gl.glLineWidth(1.0f);
-		gl.glBegin(GL.GL_LINES);
-		gl.glVertex2f(-200.0f, 0.0f);
-		gl.glVertex2f(200.0f, 0.0f);
-		gl.glEnd();
-
-		gl.glColor3f(0.0f, 1.0f, 0.0f);
-		gl.glBegin(GL.GL_LINES);
-		gl.glVertex2f(0.0f, -200.0f);
-		gl.glVertex2f(0.0f, 200.0f);
-		gl.glEnd();
+		
+		selecionado = Mundo.getInstance().getObjetos().get(0);
+		
+		estado = Estado.DESENHO;
 	}
 
 	public void display(GLAutoDrawable arg0) {
@@ -60,7 +52,7 @@ public class Main implements GLEventListener, KeyListener, MouseListener, MouseM
 		gl.glMatrixMode(GL.GL_MODELVIEW);
 		gl.glLoadIdentity();
 
-		SRU();
+		//SRU();
 
 		Mundo.getInstance().getObjetos().forEach(o -> o.desenha(gl));
 		gl.glFlush();
@@ -92,13 +84,16 @@ public class Main implements GLEventListener, KeyListener, MouseListener, MouseM
 	}
 
 	public void keyPressed(KeyEvent e) {
-		System.err.println(e.getKeyCode());
+		
+		
 		if(e.getKeyCode() == 120) {
 			System.out.println(Mundo.getInstance().getObjetos());
 		}
+		
 		switch (e.getKeyChar()) {
 		case ' ':
-			Mundo.getInstance().adicionarObjeto();
+			selecionado.setPrimitiva(GL.GL_LINE_LOOP);
+			selecionado = Mundo.getInstance().adicionarObjeto();
 		case 'i':
 			move(50f, -50f, 50f, -50f);
 			break;
@@ -132,43 +127,33 @@ public class Main implements GLEventListener, KeyListener, MouseListener, MouseM
 
 	@Override
 	public void mouseDragged(MouseEvent e) {
-
 		int movtoX = e.getX() - x;
 		int movtoY = e.getY() - y;
-
-		System.out.println("posMouse: " + movtoX + " / " + movtoY);
-
 		x = e.getX();
 		y = e.getY();
-
 		glDrawable.display();
 	}
 
 	@Override
 	public void mouseMoved(MouseEvent arg0) {
-		System.out.println(String.format("Moved %s - %s", arg0.getX(), arg0.getY()));
 	}
 
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
-		System.out.println(String.format("Clicked %s - %s", arg0.getX(), arg0.getY()));
 	}
 
 	@Override
 	public void mouseEntered(MouseEvent arg0) {
-		//System.out.println(String.format("MouseEntered %s - %s", arg0.getX(), arg0.getY()));
 	}
 
 	@Override
 	public void mouseExited(MouseEvent arg0) {
-		//System.out.println(String.format("Exited %s - %s", arg0.getX(), arg0.getY()));
 	}
 
 	@Override
 	public void mousePressed(MouseEvent arg0) {
 		x = arg0.getX();
 		y = arg0.getY();
-		System.out.println(String.format("Pressed %s - %s", x,y));
 		Mundo.getInstance().adicionarPonto(x, y);
 		glDrawable.display();
 	}
