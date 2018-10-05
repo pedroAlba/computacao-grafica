@@ -127,15 +127,13 @@ public class Main implements GLEventListener, KeyListener, MouseListener, MouseM
 
 	@Override
 	public void mouseDragged(MouseEvent e) {
-		int movtoX = e.getX() - x;
-		int movtoY = e.getY() - y;
-		x = e.getX();
-		y = e.getY();
-		glDrawable.display();
 	}
 
 	@Override
-	public void mouseMoved(MouseEvent arg0) {
+	public void mouseMoved(MouseEvent e) {
+		if(selecionado != null)
+			selecionado.drag(e.getX(), e.getY());
+		glDrawable.display();
 	}
 
 	@Override

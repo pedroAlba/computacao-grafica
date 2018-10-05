@@ -65,4 +65,13 @@ public class ObjetoGrafico {
 	public void setPrimitiva(int primitiva) {
 		this.primitiva = primitiva;
 	}
+
+	public void drag(int movtoX, int movtoY) {
+		if(pontos.isEmpty())
+			return;
+		
+		Ponto4D p = pontos.get(pontos.size() - 1);
+		p.setX(movtoX);
+		p.setY(movtoY);
+	}
 }
