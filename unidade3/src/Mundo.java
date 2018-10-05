@@ -48,6 +48,9 @@ public class Mundo {
 	 * @param y coordenada y
 	 */
 	void adicionarPonto(double x, double y) {
+		if  (getLast().getPontos().isEmpty()) {
+			selecionado = getLast();
+		}
 		getLast().adicionarPonto(x, y,0,0);
 	}
 	
