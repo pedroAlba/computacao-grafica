@@ -17,7 +17,7 @@ public class Frame extends JFrame{
 	private int janelaLargura  = 400, janelaAltura = 400;
 
 	
-	public Frame() {		
+	public Frame() {	
 		// Cria o frame.
 		super("CG-N2_BemVindo");   
 		setBounds(300,250,416,439);  // 400 + 22 da borda do titulo da janela

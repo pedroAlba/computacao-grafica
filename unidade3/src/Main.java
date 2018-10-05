@@ -28,8 +28,6 @@ public class Main implements GLEventListener, KeyListener, MouseListener, MouseM
 	private int x = 0;
 	private int y = 0;
 	
-	private ObjetoGrafico selecionado;
-	
 	private Estado estado;
 	
 	private boolean poligonoAberto;
@@ -42,9 +40,6 @@ public class Main implements GLEventListener, KeyListener, MouseListener, MouseM
 		glDrawable.setGL(new DebugGL(gl));
 		System.out.println("Espaço de desenho com tamanho: " + drawable.getWidth() + " x " + drawable.getHeight());
 		gl.glClearColor(1f, 1f, 1f, 0f);
-		
-		selecionado = Mundo.getInstance().getObjetos().get(0);
-		
 		estado = Estado.DESENHO;
 	}
 
@@ -55,9 +50,9 @@ public class Main implements GLEventListener, KeyListener, MouseListener, MouseM
 		gl.glLoadIdentity();
 
 		if(poligonoAberto) {
-			selecionado.setPrimitiva(GL.GL_LINE_STRIP);
+			Mundo.getInstance().setPrimitiva(GL.GL_LINE_STRIP);
 		} else {
-			selecionado.setPrimitiva(GL.GL_LINE_LOOP);
+			Mundo.getInstance().setPrimitiva(GL.GL_LINE_LOOP);
 		}
 			
 		Mundo.getInstance().getObjetos().forEach(o -> o.desenha(gl));
@@ -97,7 +92,7 @@ public class Main implements GLEventListener, KeyListener, MouseListener, MouseM
 		
 		switch (e.getKeyChar()) {
 		case ' ':
-			selecionado = Mundo.getInstance().adicionarObjeto();
+			Mundo.getInstance().adicionarObjeto();
 		case 'i':
 			move(50f, -50f, 50f, -50f);
 			break;
@@ -118,7 +113,11 @@ public class Main implements GLEventListener, KeyListener, MouseListener, MouseM
 			break;
 		case 'p':
 			poligonoAberto = !poligonoAberto;
+			break;
+		case 't':
+			Mundo.getInstance().mudaCor();
 		}
+		
 		
 		glDrawable.display();
 	}
@@ -138,8 +137,7 @@ public class Main implements GLEventListener, KeyListener, MouseListener, MouseM
 
 	@Override
 	public void mouseMoved(MouseEvent e) {
-		if(selecionado != null)
-			selecionado.drag(e.getX(), e.getY());
+		Mundo.getInstance().drag(e.getX(), e.getY());
 		glDrawable.display();
 	}
 

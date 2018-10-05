@@ -14,13 +14,18 @@ public class Mundo {
 	private List<ObjetoGrafico> objetos = new ArrayList<ObjetoGrafico>();
 	
 	//TODO: Avaliar se é o local mais correto
-	private ObjetoGrafico objetoSelecionado;
+	private ObjetoGrafico selecionado;
+	
+	private ObjetoGrafico current;
 	
 	private Camera camera;
 	
 	private Mundo() {
 		this.camera = new Camera();
-		objetos.add(new ObjetoGrafico(GL.GL_LINE_STRIP));
+		ObjetoGrafico o = new ObjetoGrafico(GL.GL_LINE_STRIP);
+		objetos.add(o);
+		selecionado = o; 
+		current = o;
 	}
 	
 	public static Mundo getInstance() {
@@ -43,15 +48,31 @@ public class Mundo {
 	 * @param y coordenada y
 	 */
 	void adicionarPonto(double x, double y) {
-		this.objetos.get(this.objetos.size() -1).adicionarPonto(x, y,0,0);
+		getLast().adicionarPonto(x, y,0,0);
 	}
 	
 	/**
 	 * Adiciona um novo objetoGrafico ao final da lista
 	 */
-	public ObjetoGrafico adicionarObjeto() {
-		ObjetoGrafico o = new ObjetoGrafico(GL.GL_LINE_STRIP);		
-		this.objetos.add(o);
-		return o;
+	public void adicionarObjeto() {
+		current = new ObjetoGrafico();
+		selecionado = getLast();
+		this.objetos.add(current);
+	}
+
+	public void setPrimitiva(int primitiva) {
+		selecionado.setPrimitiva(primitiva);
+	}
+
+	public void mudaCor() {
+		selecionado.mudaCor();
+	}
+
+	public void drag(int x, int y) {
+		current.drag(x, y);
+	}
+	
+	private ObjetoGrafico getLast() {
+		return objetos.get(objetos.size() - 1);
 	}
 }

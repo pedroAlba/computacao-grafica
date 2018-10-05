@@ -17,6 +17,8 @@ public class ObjetoGrafico {
 	
 	private String color;
 	
+	private int r, g, b, currentColor;
+	
 	/**
 	 * Controle para ver se precisa desenhar o rastro
 	 */
@@ -30,6 +32,11 @@ public class ObjetoGrafico {
 		this.primitiva = primitiva;
 		this.bbox = new BoundingBox();
 	}
+	
+	public ObjetoGrafico() {
+		this.primitiva = GL.GL_LINE_STRIP;
+		this.bbox = new BoundingBox();
+	}
 	/**
 	 * Itera sobre todos os pontos, e inicia um desenho na tela, com base na primitiva definida na variavel {@link primitiva}
 	 * @param gl
@@ -39,8 +46,7 @@ public class ObjetoGrafico {
 		gl.glLineWidth(2.0f);
 		
 		gl.glBegin(primitiva);
-		gl.glColor3f(0.0f, 0.0f, 0.0f);
-		
+		gl.glColor3f(r,g,b);		
 		for (Ponto4D p : pontos) {
 			gl.glVertex2d(p.getX(), p.getY());
 		}
@@ -76,5 +82,34 @@ public class ObjetoGrafico {
 		Ponto4D p = pontos.get(pontos.size() - 1);
 		p.setX(movtoX);
 		p.setY(movtoY);
+	}
+
+	public void mudaCor() {
+		switch (currentColor) {
+		case 0:
+			r = 255;
+			g = 0;
+			b = 0;
+			break;
+		case 1:
+			r = 0;
+			g = 255;
+			b = 0;
+			break;
+		case 2:
+			r = 0;
+			g = 0;
+			b = 255;
+			break;
+
+		default:
+			break;
+		}
+		
+		currentColor++;
+		if(currentColor > 2) {
+			currentColor = 0;
+		}
+		
 	}
 }
