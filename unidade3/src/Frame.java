@@ -12,7 +12,7 @@ import javax.swing.WindowConstants;
 public class Frame extends JFrame{
 
 	private static final long serialVersionUID = 1L;
-	private Main renderer = new Main();
+	private Main renderer = new Main(this);
 	
 	private int janelaLargura  = 400, janelaAltura = 400;
 
@@ -22,8 +22,7 @@ public class Frame extends JFrame{
 		super("CG-N2_BemVindo");   
 		setBounds(300,250,416,439);  // 400 + 22 da borda do titulo da janela
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		getContentPane().setLayout(new BorderLayout());
-
+		getContentPane().setLayout(new BorderLayout());		
 		/* Cria um objeto GLCapabilities para especificar 
 		 * o numero de bits por pixel para RGBA
 		 */

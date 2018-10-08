@@ -10,6 +10,8 @@ import javax.media.opengl.GLAutoDrawable;
 import javax.media.opengl.GLEventListener;
 import javax.media.opengl.glu.GLU;
 
+import com.sun.glass.ui.Cursor;
+
 /**
  * Classe destinada a fazer a interação com o usuário, delegando os eventos de mouse / teclado para as respectivas classes
  *
@@ -24,13 +26,18 @@ public class Main implements GLEventListener, KeyListener, MouseListener, MouseM
 	private GL gl;
 	private GLU glu;
 	private GLAutoDrawable glDrawable;
+	private Frame frame;
 
 	private int x = 0;
 	private int y = 0;
 	
-	private Estado estado;
+	private boolean ehDesenho = true;
 	
 	private boolean poligonoAberto;
+	
+	public Main(Frame f) {
+		this.frame = f;
+	}
 	
 	public void init(GLAutoDrawable drawable) {
 		System.out.println(" --- init ---");
@@ -40,7 +47,6 @@ public class Main implements GLEventListener, KeyListener, MouseListener, MouseM
 		glDrawable.setGL(new DebugGL(gl));
 		System.out.println("Espaço de desenho com tamanho: " + drawable.getWidth() + " x " + drawable.getHeight());
 		gl.glClearColor(1f, 1f, 1f, 0f);
-		estado = Estado.DESENHO;
 	}
 
 	public void display(GLAutoDrawable arg0) {
@@ -93,6 +99,7 @@ public class Main implements GLEventListener, KeyListener, MouseListener, MouseM
 		switch (e.getKeyChar()) {
 		case ' ':
 			Mundo.getInstance().adicionarObjeto();
+			break;
 		case 'i':
 			move(50f, -50f, 50f, -50f);
 			break;
@@ -116,6 +123,14 @@ public class Main implements GLEventListener, KeyListener, MouseListener, MouseM
 			break;
 		case 't':
 			Mundo.getInstance().mudaCor();
+			break;
+		case 'm':
+			ehDesenho = !ehDesenho;
+			if(ehDesenho) {
+				frame.setCursor(new java.awt.Cursor(Cursor.CURSOR_POINTING_HAND));
+			}else {
+				frame.setCursor(new java.awt.Cursor(Cursor.CURSOR_DEFAULT));
+			}
 		}
 		
 		
@@ -155,10 +170,15 @@ public class Main implements GLEventListener, KeyListener, MouseListener, MouseM
 
 	@Override
 	public void mousePressed(MouseEvent arg0) {
-		x = arg0.getX();
-		y = arg0.getY();		
-		Mundo.getInstance().adicionarPonto(x, y);		
-		glDrawable.display();
+		if(ehDesenho) {
+			x = arg0.getX();
+			y = arg0.getY();		
+			Mundo.getInstance().adicionarPonto(x, y);		
+			glDrawable.display();	
+		}else {
+			
+		}
+		
 	}
 
 	@Override
