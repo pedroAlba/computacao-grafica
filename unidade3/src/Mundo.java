@@ -71,11 +71,17 @@ public class Mundo {
 		selecionado.mudaCor();
 	}
 
-	public void drag(int x, int y) {
+	public void dragCurrent(int x, int y) {
 		current.drag(x, y);
 	}
 	
 	private ObjetoGrafico getLast() {
 		return objetos.get(objetos.size() - 1);
+	}
+
+	public void dragClosestPoint(int x, int y, int newX, int newY) {
+		Ponto4D p = selecionado.searchClosest(x, y);
+		p.setX(newX);
+		p.setY(newY);
 	}
 }

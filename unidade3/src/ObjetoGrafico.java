@@ -112,4 +112,9 @@ public class ObjetoGrafico {
 		}
 		
 	}
+
+	public Ponto4D searchClosest(int x, int y) {
+		//TODO: Procurar ponto mais próximo
+		return pontos.get(0);
+	}
 }
