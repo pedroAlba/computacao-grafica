@@ -1,5 +1,9 @@
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 import javax.media.opengl.GL;
 
@@ -114,7 +118,10 @@ public class ObjetoGrafico {
 	}
 
 	public Ponto4D searchClosest(int x, int y) {
-		//TODO: Procurar ponto mais próximo
-		return pontos.get(0);
+		Map<Double, Ponto4D> distancias = new TreeMap();
+		for (Ponto4D ponto4d : pontos) {
+			distancias.put(Math.pow((x - ponto4d.getX()),2) + Math.pow((y - ponto4d.getY()),2), ponto4d);
+		}
+		return distancias.values().stream().findFirst().get();
 	}
 }

@@ -151,17 +151,19 @@ public class Main implements GLEventListener, KeyListener, MouseListener, MouseM
 
 	@Override
 	public void mouseDragged(MouseEvent e) {
+		System.out.println("dragged");
 		if(! ehDesenho) {
-			int movtoX = e.getX() - x;
-		    int movtoY = e.getY() - y;
-		
-			Dx += movtoX;
-			Dy += movtoY;
 			
-		    x = e.getX();
-			y = e.getY();		
-			Mundo.getInstance().dragClosestPoint(x, y, movtoX, movtoY);
-			glDrawable.display();	
+			int movtoX = e.getX() - x;
+			int movtoY = e.getY() - y;
+
+			System.out.println("posMouse: " + movtoX + " / " + movtoY);
+
+			x = e.getX();
+			y = e.getY();
+			
+			Mundo.getInstance().dragClosestPoint(e.getX(), e.getY());
+			glDrawable.display();
 		}
 	}
 
@@ -172,7 +174,9 @@ public class Main implements GLEventListener, KeyListener, MouseListener, MouseM
 	}
 
 	@Override
-	public void mouseClicked(MouseEvent arg0) {
+	public void mouseClicked(MouseEvent e) {
+		System.out.println("clicked");
+		Mundo.getInstance().setupClosestPoint(e.getX(), e.getY());
 	}
 
 	@Override

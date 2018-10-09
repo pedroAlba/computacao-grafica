@@ -20,6 +20,8 @@ public class Mundo {
 	
 	private Camera camera;
 	
+	private Ponto4D currentPoint;
+	
 	private Mundo() {
 		this.camera = new Camera();
 		ObjetoGrafico o = new ObjetoGrafico(GL.GL_LINE_STRIP);
@@ -79,9 +81,12 @@ public class Mundo {
 		return objetos.get(objetos.size() - 1);
 	}
 
-	public void dragClosestPoint(int x, int y, int newX, int newY) {
-		Ponto4D p = selecionado.searchClosest(x, y);
-		p.setX(newX);
-		p.setY(newY);
+	public void dragClosestPoint(int newX, int newY) {
+		currentPoint.setX(newX);
+		currentPoint.setY(newY);
+	}
+
+	public void setupClosestPoint(int x, int y) {
+		currentPoint = selecionado.searchClosest(x, y);
 	}
 }
