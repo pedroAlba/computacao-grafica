@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.media.opengl.GL;
 
@@ -88,5 +89,10 @@ public class Mundo {
 
 	public void setupClosestPoint(int x, int y) {
 		currentPoint = selecionado.searchClosest(x, y);
+	}
+
+	public void deleteCurrentPoint() {
+		selecionado.getPontos().removeIf(p -> p.getX() == currentPoint.getX() &&
+											  p.getY() == currentPoint.getY());
 	}
 }

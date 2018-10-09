@@ -113,7 +113,12 @@ public class Main implements GLEventListener, KeyListener, MouseListener, MouseM
 			move(50f, 50f, 0f, 0f);
 			break;
 		case 'd':
-			move(-50f, -50f, 0f, 0f);
+			if(ehDesenho) { 
+				move(-50f, -50f, 0f, 0f);	
+			}else {
+				Mundo.getInstance().deleteCurrentPoint();
+			}
+			
 			break;
 		case 'c':
 			move(0f, 0f, -50f, -50f);
@@ -177,6 +182,7 @@ public class Main implements GLEventListener, KeyListener, MouseListener, MouseM
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
+		Mundo.getInstance().setupClosestPoint(e.getX(), e.getY());
 	}
 
 	@Override
