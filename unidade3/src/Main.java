@@ -151,7 +151,9 @@ public class Main implements GLEventListener, KeyListener, MouseListener, MouseM
 
 	@Override
 	public void mouseDragged(MouseEvent e) {
-		System.out.println("dragged");
+		
+		Mundo.getInstance().setupClosestPoint(e.getX(), e.getY());
+		
 		if(! ehDesenho) {
 			
 			int movtoX = e.getX() - x;
@@ -175,8 +177,6 @@ public class Main implements GLEventListener, KeyListener, MouseListener, MouseM
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		System.out.println("clicked");
-		Mundo.getInstance().setupClosestPoint(e.getX(), e.getY());
 	}
 
 	@Override
