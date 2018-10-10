@@ -57,11 +57,21 @@ public class ObjetoGrafico {
 		
 		gl.glEnd();		
 		
+		if  (!pontos.isEmpty()) {
+			bbox.desenharOpenGLBBox(gl);
+		}
+	}
+	
+	void atualizaBBox() {
+		for (Ponto4D p : pontos) {
+			bbox.atualizarBBox(p);			
+		}
 	}
 	
 	void adicionarPonto(double x, double y, double z, double w) {
 		if(pontos.isEmpty()) {
 			pontos.add(new Ponto4D(x, y, z, w));	
+			bbox.atribuirBoundingBox(x, y, z, x, y, z);
 		}
 		pontos.add(new Ponto4D(x, y, z, w));
 	}

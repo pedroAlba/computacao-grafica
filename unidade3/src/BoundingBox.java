@@ -79,7 +79,8 @@ public final class BoundingBox {
 	 * @param gl
 	 */
 	public void desenharOpenGLBBox(GL gl) {
-		gl.glColor3f(1.0f, 0.0f, 0.0f);
+		gl.glLineWidth(1.0f);
+		gl.glColor3f(1.0f, 1.0f, 0.0f);
 
 		gl.glBegin (GL.GL_LINE_LOOP);
 			gl.glVertex3d (menorX, maiorY, menorZ);

@@ -62,6 +62,7 @@ public class Mundo {
 	 */
 	public void adicionarObjeto() {
 		current = new ObjetoGrafico();
+		getLast().atualizaBBox();
 		selecionado = getLast();
 		this.objetos.add(current);
 	}
@@ -85,6 +86,8 @@ public class Mundo {
 	public void dragClosestPoint(int newX, int newY) {
 		currentPoint.setX(newX);
 		currentPoint.setY(newY);
+		
+		selecionado.atualizaBBox();
 	}
 
 	public void setupClosestPoint(int x, int y) {
