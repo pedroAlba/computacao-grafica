@@ -17,14 +17,7 @@ public class ObjetoGrafico {
 	
 	private BoundingBox bbox;
 	
-	private String color;
-	
 	private int r, g, b, currentColor;
-	
-	/**
-	 * Controle para ver se precisa desenhar o rastro
-	 */
-	private boolean desenhando = true;
 	
 	void desenha(GL gl) {
 		desenhaLinhas(gl);
@@ -53,16 +46,19 @@ public class ObjetoGrafico {
 			gl.glVertex2d(p.getX(), p.getY());
 		}
 		
-		gl.glEnd();		
-		
+		gl.glEnd();
+	}
+
+	public void desenhaBBox(GL gl) {
 		if  (!pontos.isEmpty()) {
 			bbox.desenharOpenGLBBox(gl);
 		}
 	}
 	
 	void atualizaBBox() {
-		Ponto4D pri = pontos.get(0);
-		bbox.atribuirBoundingBox(pri.getX(), pri.getY(), pri.getZ(), pri.getX(), pri.getY(), pri.getZ());
+		
+		pontos.stream().findFirst().ifPresent(p -> bbox.atribuirBoundingBox(p));
+		
 		for (Ponto4D p : pontos) {
 			bbox.atualizarBBox(p);			
 		}
@@ -124,7 +120,6 @@ public class ObjetoGrafico {
 		if(currentColor > 2) {
 			currentColor = 0;
 		}
-		
 	}
 
 	public Ponto4D searchClosest(int x, int y) {

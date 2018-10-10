@@ -51,9 +51,13 @@ public class Mundo {
 	 */
 	void adicionarPonto(double x, double y) {
 		if  (getLast().getPontos().isEmpty()) {
-			selecionado = getLast();
+			atualizaSelecionado();
 		}
 		getLast().adicionarPonto(x, y,0,0);
+	}
+
+	private ObjetoGrafico atualizaSelecionado() {
+		return selecionado = getLast();
 	}
 	
 	/**
@@ -62,7 +66,7 @@ public class Mundo {
 	public void adicionarObjeto() {
 		current = new ObjetoGrafico();
 		getLast().atualizaBBox();
-		selecionado = getLast();
+		atualizaSelecionado();
 		this.objetos.add(current);
 	}
 
@@ -85,7 +89,6 @@ public class Mundo {
 	public void dragClosestPoint(int newX, int newY) {
 		currentPoint.setX(newX);
 		currentPoint.setY(newY);
-		
 		selecionado.atualizaBBox();
 	}
 
@@ -96,5 +99,9 @@ public class Mundo {
 	public void deleteCurrentPoint() {
 		selecionado.getPontos().removeIf(p -> p.getX() == currentPoint.getX() &&
 											  p.getY() == currentPoint.getY());
+	}
+
+	public void desenhaBBox(GL gl) {
+		selecionado.desenhaBBox(gl);
 	}
 }

@@ -36,6 +36,16 @@ public final class BoundingBox {
 		this.maiorZ = greaterZ;
 		processarCentroBBox();
 	}
+	
+	public void atribuirBoundingBox(Ponto4D p) {
+		this.menorX = p.getX();
+		this.menorY = p.getY();
+		this.menorZ = p.getZ();
+		this.maiorX = p.getX();
+		this.maiorY = p.getY();
+		this.maiorZ = p.getZ();
+		processarCentroBBox();
+	}
 		
 	public void atualizarBBox(Ponto4D point) {
 	    atualizarBBox(point.getX(), point.getY(), point.getZ());
