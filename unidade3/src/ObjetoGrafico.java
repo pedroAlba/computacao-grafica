@@ -1,6 +1,4 @@
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -63,6 +61,8 @@ public class ObjetoGrafico {
 	}
 	
 	void atualizaBBox() {
+		Ponto4D pri = pontos.get(0);
+		bbox.atribuirBoundingBox(pri.getX(), pri.getY(), pri.getZ(), pri.getX(), pri.getY(), pri.getZ());
 		for (Ponto4D p : pontos) {
 			bbox.atualizarBBox(p);			
 		}

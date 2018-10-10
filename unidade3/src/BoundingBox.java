@@ -56,13 +56,17 @@ public final class BoundingBox {
 	    if (y < menorY)
 	        menorY = y;
 	    else {
-	        if (y > maiorY) maiorY = y;
+	        if (y > maiorY)
+	        	maiorY = y;
 	    }
 	    if (z < menorZ)
 	        menorZ = z;
 	    else {
 	        if (z > maiorZ) maiorZ = z;
 	    }
+	    System.out.println("Atual: " + x + " " + y);
+	    System.out.println("Maior: " + maiorX + " " + maiorY);
+	    System.out.println("Menor: " + menorX + " " + menorY);
 	}
 	
 	/**

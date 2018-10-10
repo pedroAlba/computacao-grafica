@@ -31,9 +31,6 @@ public class Main implements GLEventListener, KeyListener, MouseListener, MouseM
 	private int x = 0;
 	private int y = 0;
 	
-	private int Dx = 200;
-	private int Dy = -200;
-	
 	private boolean ehDesenho = true;
 	
 	private boolean poligonoAberto;
@@ -161,11 +158,6 @@ public class Main implements GLEventListener, KeyListener, MouseListener, MouseM
 		
 		if(! ehDesenho) {
 			
-			int movtoX = e.getX() - x;
-			int movtoY = e.getY() - y;
-
-			System.out.println("posMouse: " + movtoX + " / " + movtoY);
-
 			x = e.getX();
 			y = e.getY();
 			
