@@ -11,6 +11,8 @@ import javax.media.opengl.GL;
  */
 public class ObjetoGrafico {
 
+	GL gl;
+	
 	private List<Ponto4D> pontos = new ArrayList<>();
 	
 	private int primitiva;
@@ -22,6 +24,14 @@ public class ObjetoGrafico {
 	void desenha(GL gl) {
 		desenhaLinhas(gl);
 	}
+
+	private Transformacao4D matrizObjeto = new Transformacao4D();
+	/// Matrizes temporarias que sempre sao inicializadas com matriz Identidade entao podem ser "static".
+	private static Transformacao4D matrizTmpTranslacao = new Transformacao4D();
+	private static Transformacao4D matrizTmpTranslacaoInversa = new Transformacao4D();
+	private static Transformacao4D matrizTmpEscala = new Transformacao4D();		
+//	private static Transformacao4D matrizTmpRotacaoZ = new Transformacao4D();
+	private static Transformacao4D matrizGlobal = new Transformacao4D();
 
 	public ObjetoGrafico(int primitiva) {
 		this.primitiva = primitiva;
@@ -40,13 +50,16 @@ public class ObjetoGrafico {
 		
 		gl.glLineWidth(2.0f);
 		
-		gl.glBegin(primitiva);
-		gl.glColor3f(r,g,b);		
-		for (Ponto4D p : pontos) {
-			gl.glVertex2d(p.getX(), p.getY());
-		}
-		
-		gl.glEnd();
+		gl.glPushMatrix();
+		gl.glMultMatrixd(matrizObjeto.GetDate(), 0);
+			gl.glBegin(primitiva);
+			gl.glColor3f(r,g,b);		
+			for (Ponto4D p : pontos) {
+				gl.glVertex2d(p.getX(), p.getY());
+			}
+			
+			gl.glEnd();
+		gl.glPopMatrix();
 	}
 
 	public void desenhaBBox(GL gl) {
@@ -129,4 +142,62 @@ public class ObjetoGrafico {
 		}
 		return distancias.values().stream().findFirst().get();
 	}
+	
+	public void atribuirGL(GL gl) {
+		this.gl = gl;
+	}
+
+	public void translacaoXYZ(double tx, double ty, double tz) {
+		Transformacao4D matrizTranslate = new Transformacao4D();
+		matrizTranslate.atribuirTranslacao(tx,ty,tz);
+		matrizObjeto = matrizTranslate.transformMatrix(matrizObjeto);		
+	}
+	
+	public void escalaXYZ(double Sx,double Sy) {
+		Transformacao4D matrizScale = new Transformacao4D();		
+		matrizScale.atribuirEscala(Sx,Sy,1.0);
+		matrizObjeto = matrizScale.transformMatrix(matrizObjeto);
+	}
+
+	public void atribuirIdentidade() {
+		matrizObjeto.atribuirIdentidade();
+	}
+
+	public void escalaXYZPtoFixo(double escala, Ponto4D ptoFixo) {
+		matrizGlobal.atribuirIdentidade();
+
+		matrizTmpTranslacao.atribuirTranslacao(ptoFixo.getX(),ptoFixo.getY(),ptoFixo.getZ());
+		matrizGlobal = matrizTmpTranslacao.transformMatrix(matrizGlobal);
+
+		matrizTmpEscala.atribuirEscala(escala, escala, 1.0);
+		matrizGlobal = matrizTmpEscala.transformMatrix(matrizGlobal);
+
+		ptoFixo.inverterSinal(ptoFixo);
+		matrizTmpTranslacaoInversa.atribuirTranslacao(ptoFixo.getX(),ptoFixo.getY(),ptoFixo.getZ());
+		matrizGlobal = matrizTmpTranslacaoInversa.transformMatrix(matrizGlobal);
+
+		matrizObjeto = matrizObjeto.transformMatrix(matrizGlobal);
+	}
+	
+	public void rotacaoZPtoFixo(double angulo, Ponto4D ptoFixo) {
+		matrizGlobal.atribuirIdentidade();
+
+		matrizTmpTranslacao.atribuirTranslacao(ptoFixo.getX(),ptoFixo.getY(),ptoFixo.getZ());
+		matrizGlobal = matrizTmpTranslacao.transformMatrix(matrizGlobal);
+
+		matrizTmpEscala.atribuirRotacaoZ(Transformacao4D.DEG_TO_RAD * angulo);
+		matrizGlobal = matrizTmpEscala.transformMatrix(matrizGlobal);
+
+		ptoFixo.inverterSinal(ptoFixo);
+		matrizTmpTranslacaoInversa.atribuirTranslacao(ptoFixo.getX(),ptoFixo.getY(),ptoFixo.getZ());
+		matrizGlobal = matrizTmpTranslacaoInversa.transformMatrix(matrizGlobal);
+
+		matrizObjeto = matrizObjeto.transformMatrix(matrizGlobal);
+	}
+
+	public void exibeMatriz() {
+		matrizObjeto.exibeMatriz();
+	}
+
+	
 }

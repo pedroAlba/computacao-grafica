@@ -104,4 +104,21 @@ public class Mundo {
 	public void desenhaBBox(GL gl) {
 		selecionado.desenhaBBox(gl);
 	}
+	
+	public void translacaoXYZ(double tx, double ty, double tz){
+		selecionado.translacaoXYZ(tx, ty, tz);
+		//selecionado.atualizaBBox();
+	}
+	
+	public void escalaXYZ(double Sx,double Sy) {
+		selecionado.escalaXYZ(Sx, Sy);
+	}
+	
+	public void escalaXYZPtoFixo(double escala, Ponto4D ptoFixo) {
+		selecionado.escalaXYZPtoFixo(escala, ptoFixo);
+	}
+
+	public void rotacaoZPtoFixo(double angulo, Ponto4D ptoFixo) {
+		selecionado.rotacaoZPtoFixo(angulo, ptoFixo);
+	}
 }

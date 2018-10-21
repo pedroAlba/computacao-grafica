@@ -67,12 +67,9 @@ public class Main implements GLEventListener, KeyListener, MouseListener, MouseM
 	}
 	
 	public void reshape(GLAutoDrawable drawable, int x, int y, int width, int height) {
-		System.out.println("width" + width);
-		System.out.println("height" + height);
-		System.out.println(" --- reshape ---");
+		gl.glViewport(0, 0, width, height);
 		gl.glMatrixMode(GL.GL_PROJECTION);
 		gl.glLoadIdentity();
-		gl.glViewport(0, 0, width, height);
 	}
 
 	private void move(float minX, float maxX, float minY, float maxY) {
@@ -97,46 +94,77 @@ public class Main implements GLEventListener, KeyListener, MouseListener, MouseM
 			System.out.println(Mundo.getInstance().getObjetos());
 		}
 		
-		switch (e.getKeyChar()) {
-		case ' ':
+		switch (e.getKeyCode()) {
+		case KeyEvent.VK_SPACE:
 			Mundo.getInstance().adicionarObjeto();
 			break;
-		case 'i':
+		case KeyEvent.VK_I:
 			move(50f, -50f, 50f, -50f);
 			break;
-		case 'o':
+		case KeyEvent.VK_O:
 			move(-50f, 50f, -50f, 50f);
 			break;
-		case 'e':
+		case KeyEvent.VK_E:
 			move(50f, 50f, 0f, 0f);
 			break;
-		case 'd':
+		case KeyEvent.VK_D:
 			if(ehDesenho) { 
 				move(-50f, -50f, 0f, 0f);	
 			}else {
 				Mundo.getInstance().deleteCurrentPoint();
 			}
-			
 			break;
-		case 'c':
+		case KeyEvent.VK_C:
 			move(0f, 0f, -50f, -50f);
 			break;
-		case 'b':
+		case KeyEvent.VK_B:
 			move(0f, 0f, 50f, 50f);
 			break;
-		case 'p':
+		case KeyEvent.VK_P:
 			poligonoAberto = !poligonoAberto;
 			break;
-		case 't':
+		case KeyEvent.VK_T:
 			Mundo.getInstance().mudaCor();
 			break;
-		case 'm':
+		case KeyEvent.VK_M:
 			ehDesenho = !ehDesenho;
 			if(ehDesenho) {
 				frame.setCursor(new java.awt.Cursor(Cursor.CURSOR_POINTING_HAND));
 			}else {
 				frame.setCursor(new java.awt.Cursor(Cursor.CURSOR_DEFAULT));
 			}
+			break;
+		//Translação
+		case KeyEvent.VK_RIGHT:
+			Mundo.getInstance().translacaoXYZ(2.0,0.0,0.0);
+			break;
+		case KeyEvent.VK_LEFT:
+			Mundo.getInstance().translacaoXYZ(-2.0,0.0,0.0);
+			break;
+		case KeyEvent.VK_UP:
+			Mundo.getInstance().translacaoXYZ(0.0,-2.0,0.0);
+			break;
+		case KeyEvent.VK_DOWN:
+			Mundo.getInstance().translacaoXYZ(0.0,2.0,0.0);
+			break;
+		//Escala
+		case KeyEvent.VK_PAGE_UP:
+			Mundo.getInstance().escalaXYZ(2.0,2.0);
+			break;
+		case KeyEvent.VK_PAGE_DOWN:
+			Mundo.getInstance().escalaXYZ(0.5,0.5);
+			break;
+		case KeyEvent.VK_1:
+			Mundo.getInstance().escalaXYZPtoFixo(0.5, new Ponto4D(-15.0,-15.0,0.0,0.0));
+			break;
+			
+		case KeyEvent.VK_2:
+			Mundo.getInstance().escalaXYZPtoFixo(2.0, new Ponto4D(-15.0,-15.0,0.0,0.0));
+			break;
+			
+		case KeyEvent.VK_3:
+			Mundo.getInstance().rotacaoZPtoFixo(10.0, new Ponto4D(-15.0,-15.0,0.0,0.0));
+			break;
 		}
 		
 		
