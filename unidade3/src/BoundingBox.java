@@ -58,25 +58,21 @@ public final class BoundingBox {
 	 * @param z novo valor de z
 	 */
 	public void atualizarBBox(double x, double y, double z) {
-	    if (x < menorX)
-	        menorX = x;
-	    else {
-	        if (x > maiorX) maiorX = x;
-	    }
-	    if (y < menorY)
-	        menorY = y;
-	    else {
-	        if (y > maiorY)
-	        	maiorY = y;
-	    }
-	    if (z < menorZ)
-	        menorZ = z;
-	    else {
-	        if (z > maiorZ) maiorZ = z;
-	    }
-	    System.out.println("Atual: " + x + " " + y);
-	    System.out.println("Maior: " + maiorX + " " + maiorY);
-	    System.out.println("Menor: " + menorX + " " + menorY);
+		if (x < menorX) {
+			menorX = x;
+		} else if (x > maiorX) {
+			maiorX = x;
+		}
+		if (y < menorY) {
+			menorY = y;
+		} else if (y > maiorY) {
+			maiorY = y;
+		}
+		if (z < menorZ) {
+			menorZ = z;
+		} else if (z > maiorZ) {
+			maiorZ = z;
+		}
 	}
 	
 	/**
@@ -96,12 +92,14 @@ public final class BoundingBox {
 		gl.glLineWidth(1.0f);
 		gl.glColor3f(1.0f, 1.0f, 0.0f);
 
+		gl.glEnable(GL.GL_LINE_STIPPLE);
 		gl.glBegin (GL.GL_LINE_LOOP);
 			gl.glVertex3d (menorX, maiorY, menorZ);
 			gl.glVertex3d (maiorX, maiorY, menorZ);
 			gl.glVertex3d (maiorX, menorY, menorZ);
 			gl.glVertex3d (menorX, menorY, menorZ);
 	    gl.glEnd();
+	    gl.glDisable(GL.GL_LINE_STIPPLE);
 	    gl.glBegin(GL.GL_LINE_LOOP);
 	    	gl.glVertex3d (menorX, menorY, menorZ);
 	    	gl.glVertex3d (menorX, menorY, maiorZ);

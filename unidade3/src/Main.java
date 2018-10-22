@@ -16,7 +16,6 @@ import com.sun.glass.ui.Cursor;
  * Classe destinada a fazer a interação com o usuário, delegando os eventos de mouse / teclado para as respectivas classes
  *
  */
-
 public class Main implements GLEventListener, KeyListener, MouseListener, MouseMotionListener {
 
 	private float minX = -400;
@@ -35,18 +34,19 @@ public class Main implements GLEventListener, KeyListener, MouseListener, MouseM
 	
 	private boolean poligonoAberto;
 	
+	private Mundo mundo;
+	
 	public Main(Frame f) {
 		this.frame = f;
 	}
 	
 	public void init(GLAutoDrawable drawable) {
-		System.out.println(" --- init ---");
 		glDrawable = drawable;
 		gl = drawable.getGL();
 		glu = new GLU();
 		glDrawable.setGL(new DebugGL(gl));
-		System.out.println("Espaço de desenho com tamanho: " + drawable.getWidth() + " x " + drawable.getHeight());
 		gl.glClearColor(1f, 1f, 1f, 0f);
+		mundo = Mundo.getInstance();
 	}
 
 	public void display(GLAutoDrawable arg0) {
@@ -56,13 +56,13 @@ public class Main implements GLEventListener, KeyListener, MouseListener, MouseM
 		gl.glLoadIdentity();
 
 		if(poligonoAberto) {
-			Mundo.getInstance().setPrimitiva(GL.GL_LINE_STRIP);
+			mundo.setPrimitiva(GL.GL_LINE_STRIP);
 		} else {
-			Mundo.getInstance().setPrimitiva(GL.GL_LINE_LOOP);
+			mundo.setPrimitiva(GL.GL_LINE_LOOP);
 		}
 			
-		Mundo.getInstance().getObjetos().forEach(o -> o.desenha(gl));
-		Mundo.getInstance().desenhaBBox(gl);
+		mundo.getObjetos().forEach(o -> o.desenha(gl));
+		mundo.desenhaBBox(gl);
 		gl.glFlush();
 	}
 	
@@ -91,12 +91,12 @@ public class Main implements GLEventListener, KeyListener, MouseListener, MouseM
 	public void keyPressed(KeyEvent e) {
 		
 		if(e.getKeyCode() == 120) {
-			System.out.println(Mundo.getInstance().getObjetos());
+			System.out.println(mundo.getObjetos());
 		}
 		
 		switch (e.getKeyCode()) {
 		case KeyEvent.VK_SPACE:
-			Mundo.getInstance().adicionarObjeto();
+			mundo.adicionarObjeto();
 			break;
 		case KeyEvent.VK_I:
 			move(50f, -50f, 50f, -50f);
@@ -111,7 +111,7 @@ public class Main implements GLEventListener, KeyListener, MouseListener, MouseM
 			if(ehDesenho) { 
 				move(-50f, -50f, 0f, 0f);	
 			}else {
-				Mundo.getInstance().deleteCurrentPoint();
+				mundo.deleteCurrentPoint();
 			}
 			break;
 		case KeyEvent.VK_C:
@@ -124,7 +124,7 @@ public class Main implements GLEventListener, KeyListener, MouseListener, MouseM
 			poligonoAberto = !poligonoAberto;
 			break;
 		case KeyEvent.VK_T:
-			Mundo.getInstance().mudaCor();
+			mundo.mudaCor();
 			break;
 		case KeyEvent.VK_M:
 			ehDesenho = !ehDesenho;
@@ -136,37 +136,34 @@ public class Main implements GLEventListener, KeyListener, MouseListener, MouseM
 			break;
 		//Translação
 		case KeyEvent.VK_RIGHT:
-			Mundo.getInstance().translacaoXYZ(2.0,0.0,0.0);
+			mundo.translacaoXYZ(2.0,0.0,0.0);
 			break;
 		case KeyEvent.VK_LEFT:
-			Mundo.getInstance().translacaoXYZ(-2.0,0.0,0.0);
+			mundo.translacaoXYZ(-2.0,0.0,0.0);
 			break;
 		case KeyEvent.VK_UP:
-			Mundo.getInstance().translacaoXYZ(0.0,-2.0,0.0);
+			mundo.translacaoXYZ(0.0,-2.0,0.0);
 			break;
 		case KeyEvent.VK_DOWN:
-			Mundo.getInstance().translacaoXYZ(0.0,2.0,0.0);
+			mundo.translacaoXYZ(0.0,2.0,0.0);
 			break;
 		//Escala
 		case KeyEvent.VK_PAGE_UP:
-			Mundo.getInstance().escalaXYZ(2.0,2.0);
+			mundo.escalaXYZ(2.0,2.0);
 			break;
 		case KeyEvent.VK_PAGE_DOWN:
-			Mundo.getInstance().escalaXYZ(0.5,0.5);
+			mundo.escalaXYZ(0.5,0.5);
 			break;
 		case KeyEvent.VK_1:
-			Mundo.getInstance().escalaXYZPtoFixo(0.5, new Ponto4D(-15.0,-15.0,0.0,0.0));
+			mundo.escalaXYZPtoFixo(0.5, new Ponto4D(-15.0,-15.0,0.0,0.0));
 			break;
-			
 		case KeyEvent.VK_2:
-			Mundo.getInstance().escalaXYZPtoFixo(2.0, new Ponto4D(-15.0,-15.0,0.0,0.0));
+			mundo.escalaXYZPtoFixo(2.0, new Ponto4D(-15.0,-15.0,0.0,0.0));
 			break;
-			
 		case KeyEvent.VK_3:
-			Mundo.getInstance().rotacaoZPtoFixo(10.0, new Ponto4D(-15.0,-15.0,0.0,0.0));
+			mundo.rotacaoZPtoFixo(10.0, new Ponto4D(-15.0,-15.0,0.0,0.0));
 			break;
 		}
-		
 		
 		glDrawable.display();
 	}
@@ -183,27 +180,27 @@ public class Main implements GLEventListener, KeyListener, MouseListener, MouseM
 	@Override
 	public void mouseDragged(MouseEvent e) {
 		
-		Mundo.getInstance().setupClosestPoint(e.getX(), e.getY());
+		mundo.setupClosestPoint(e.getX(), e.getY());
 		
 		if(! ehDesenho) {
 			
 			x = e.getX();
 			y = e.getY();
 			
-			Mundo.getInstance().dragClosestPoint(e.getX(), e.getY());
+			mundo.dragClosestPoint(e.getX(), e.getY());
 			glDrawable.display();
 		}
 	}
 
 	@Override
 	public void mouseMoved(MouseEvent e) {
-		Mundo.getInstance().dragCurrent(e.getX(), e.getY());
+		mundo.dragCurrent(e.getX(), e.getY());
 		glDrawable.display();
 	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		Mundo.getInstance().setupClosestPoint(e.getX(), e.getY());
+		mundo.setupClosestPoint(e.getX(), e.getY());
 	}
 
 	@Override
@@ -219,7 +216,7 @@ public class Main implements GLEventListener, KeyListener, MouseListener, MouseM
 		if(ehDesenho) {
 			x = arg0.getX();
 			y = arg0.getY();		
-			Mundo.getInstance().adicionarPonto(x, y);		
+			mundo.adicionarPonto(x, y);		
 			glDrawable.display();	
 		}else {
 			

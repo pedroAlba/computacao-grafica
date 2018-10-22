@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.media.opengl.GL;
@@ -13,7 +14,6 @@ public class Mundo {
 	
 	private List<ObjetoGrafico> objetos = new ArrayList<ObjetoGrafico>();
 	
-	//TODO: Avaliar se é o local mais correto
 	private ObjetoGrafico selecionado;
 	
 	private ObjetoGrafico current;
@@ -106,8 +106,7 @@ public class Mundo {
 	}
 	
 	public void translacaoXYZ(double tx, double ty, double tz){
-		selecionado.translacaoXYZ(tx, ty, tz);
-		//selecionado.atualizaBBox();
+		selecionado.translacaoXYZ(tx, ty, tz);		
 	}
 	
 	public void escalaXYZ(double Sx,double Sy) {
@@ -115,10 +114,21 @@ public class Mundo {
 	}
 	
 	public void escalaXYZPtoFixo(double escala, Ponto4D ptoFixo) {
-		selecionado.escalaXYZPtoFixo(escala, ptoFixo);
+		selecionado.escalaXYZPtoFixo(escala, getCentro());
 	}
 
 	public void rotacaoZPtoFixo(double angulo, Ponto4D ptoFixo) {
-		selecionado.rotacaoZPtoFixo(angulo, ptoFixo);
+		selecionado.rotacaoZPtoFixo(angulo, getCentro() );
+	}
+
+	private Ponto4D getCentro() {
+		double maiorX = selecionado.getPontos().stream().mapToDouble(Ponto4D::getX).max().getAsDouble();
+		double maiorY = selecionado.getPontos().stream().mapToDouble(Ponto4D::getY).max().getAsDouble();
+		double menorX = selecionado.getPontos().stream().mapToDouble(Ponto4D::getX).min().getAsDouble();
+		double menorY = selecionado.getPontos().stream().mapToDouble(Ponto4D::getY).min().getAsDouble();
+		Ponto4D p = new Ponto4D();
+		p.setX(((maiorX + menorX)  / 2) * -1);
+		p.setY(((maiorY + menorY)  / 2) * -1);
+		return p;
 	}
 }
