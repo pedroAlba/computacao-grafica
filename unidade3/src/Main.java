@@ -124,7 +124,6 @@ public class Main implements GLEventListener, KeyListener, MouseListener, MouseM
 			break;
 		case KeyEvent.VK_P:
 			
-			inverteModo();
 			poligonoAberto = !poligonoAberto;
 
 			break;
@@ -241,5 +240,4 @@ public class Main implements GLEventListener, KeyListener, MouseListener, MouseM
 			modo = Modo.DESENHO;
 		}
 	}
-
 }
