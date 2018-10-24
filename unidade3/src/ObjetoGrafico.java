@@ -196,10 +196,66 @@ public class ObjetoGrafico {
 	}
 
 	public boolean isInside(int x, int y) {
-		//TODO: Adicionar scanLine
+		return insideBBox(x, y) ? scanLine(x,y) : false;
+	}
+
+	private boolean insideBBox(int x, int y) {
 		return (x >= bbox.obterMenorX() && x <= bbox.obterMaiorX())
 				&&
 			   (y >= bbox.obterMenorY() && y <= bbox.obterMaiorY());
 	}
 	
+	/**
+	 * Verifica se as coordenadas X e Y estão "dentro" do poligono
+	 * @param x
+	 * @param y
+	 * @return
+	 */
+	private boolean scanLine(int x, int y)
+	{
+		int nCruzamentos = 0;
+		
+		for (int i = 0; i < pontos.size(); i++)
+		{
+			//pega o proximo com base em i
+			int iB = (i + 1) % pontos.size();
+			
+			Ponto4D pontoA = pontos.get(i);
+			Ponto4D pontoB = pontos.get(iB);
+			
+			if (pontoA.getY() != pontoB.getY())
+			{
+				Ponto4D interseccao = interseccao(pontoA, pontoB, y); 
+				if (interseccao != null)
+				{
+					if (interseccao.getX() >= x && 
+						interseccao.getY() >= Math.min(pontoA.getY(), pontoB.getY()) && 
+						interseccao.getY() <= Math.max(pontoA.getY(), pontoB.getY()))
+					{
+						nCruzamentos++;
+					}
+				}
+			}
+		}
+		//se for impar, true
+		return !((nCruzamentos % 2) == 0);
+	}
+	
+	/**
+	 * Cálculo da Equação da Reta - Inclinação e interseção 
+	 * @param p1
+	 * @param p2
+	 * @param y
+	 * @return
+	 */
+	private Ponto4D interseccao(Ponto4D p1, Ponto4D p2, double y)
+	{		
+		double ti = (y - p1.getY()) / (p2.getY() - p1.getY());
+		if (ti >= 0.0 && ti <= 1.0)
+		{
+			double x = p1.getX() + ((p2.getX() - p1.getX()) * ti);
+			return new Ponto4D(x, y, 0, 0);
+		}
+		return null;
+	}
 }

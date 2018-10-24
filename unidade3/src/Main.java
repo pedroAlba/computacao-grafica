@@ -13,7 +13,8 @@ import javax.media.opengl.glu.GLU;
 import com.sun.glass.ui.Cursor;
 
 /**
- * Classe destinada a fazer a interação com o usuário, delegando os eventos de mouse / teclado para as respectivas classes
+ * Classe destinada a fazer a interação com o usuário, delegando os eventos de
+ * mouse / teclado para as respectivas classes
  *
  */
 public class Main implements GLEventListener, KeyListener, MouseListener, MouseMotionListener {
@@ -29,17 +30,17 @@ public class Main implements GLEventListener, KeyListener, MouseListener, MouseM
 
 	private int x = 0;
 	private int y = 0;
-	
-	private boolean ehDesenho = true;
-	
+
+	private Modo modo = Modo.DESENHO;
+
 	private boolean poligonoAberto;
-	
+
 	private Mundo mundo;
-	
+
 	public Main(Frame f) {
 		this.frame = f;
 	}
-	
+
 	public void init(GLAutoDrawable drawable) {
 		glDrawable = drawable;
 		gl = drawable.getGL();
@@ -55,17 +56,17 @@ public class Main implements GLEventListener, KeyListener, MouseListener, MouseM
 		gl.glMatrixMode(GL.GL_MODELVIEW);
 		gl.glLoadIdentity();
 
-		if(poligonoAberto) {
+		if (poligonoAberto) {
 			mundo.setPrimitiva(GL.GL_LINE_STRIP);
 		} else {
 			mundo.setPrimitiva(GL.GL_LINE_LOOP);
 		}
-			
+
 		mundo.getObjetos().forEach(o -> o.desenha(gl));
 		mundo.desenhaBBox(gl);
 		gl.glFlush();
 	}
-	
+
 	public void reshape(GLAutoDrawable drawable, int x, int y, int width, int height) {
 		gl.glViewport(0, 0, width, height);
 		gl.glMatrixMode(GL.GL_PROJECTION);
@@ -73,8 +74,9 @@ public class Main implements GLEventListener, KeyListener, MouseListener, MouseM
 	}
 
 	private void move(float minX, float maxX, float minY, float maxY) {
-		
-		if(!validaBounds(minX, maxX, minY, maxY)) return;
+
+		if (!validaBounds(minX, maxX, minY, maxY))
+			return;
 
 		this.minX += minX;
 		this.maxX += maxX;
@@ -83,17 +85,17 @@ public class Main implements GLEventListener, KeyListener, MouseListener, MouseM
 	}
 
 	private boolean validaBounds(float minX, float maxX, float minY, float maxY) {
-		return !(this.minX + minX > -100) && !(this.minY + minY > -100) && !(this.minX + minX < -700) && !(this.minX + minX < -700)
-				&& !(this.maxX + maxX < 100) && !(this.maxY + maxY < 100) && !(this.maxX + maxX > 700)
-				&& !(this.maxY + maxY > 700);
+		return !(this.minX + minX > -100) && !(this.minY + minY > -100) && !(this.minX + minX < -700)
+				&& !(this.minX + minX < -700) && !(this.maxX + maxX < 100) && !(this.maxY + maxY < 100)
+				&& !(this.maxX + maxX > 700) && !(this.maxY + maxY > 700);
 	}
 
 	public void keyPressed(KeyEvent e) {
-		
-		if(e.getKeyCode() == 120) {
+
+		if (e.getKeyCode() == 120) {
 			System.out.println(mundo.getObjetos());
 		}
-		
+
 		switch (e.getKeyCode()) {
 		case KeyEvent.VK_SPACE:
 			mundo.adicionarObjeto();
@@ -108,9 +110,9 @@ public class Main implements GLEventListener, KeyListener, MouseListener, MouseM
 			move(50f, 50f, 0f, 0f);
 			break;
 		case KeyEvent.VK_D:
-			if(ehDesenho) { 
-				move(-50f, -50f, 0f, 0f);	
-			}else {
+			if (modo.equals(Modo.DESENHO)) {
+				move(-50f, -50f, 0f, 0f);
+			} else {
 				mundo.deleteCurrentPoint();
 			}
 			break;
@@ -121,50 +123,54 @@ public class Main implements GLEventListener, KeyListener, MouseListener, MouseM
 			move(0f, 0f, 50f, 50f);
 			break;
 		case KeyEvent.VK_P:
+			
+			inverteModo();
 			poligonoAberto = !poligonoAberto;
+
 			break;
 		case KeyEvent.VK_T:
 			mundo.mudaCor();
 			break;
 		case KeyEvent.VK_M:
-			ehDesenho = !ehDesenho;
-			if(ehDesenho) {
+			inverteModo();
+
+			if (modo.equals(Modo.DESENHO)) {
 				frame.setCursor(new java.awt.Cursor(Cursor.CURSOR_POINTING_HAND));
-			}else {
+			} else {
 				frame.setCursor(new java.awt.Cursor(Cursor.CURSOR_DEFAULT));
 			}
 			break;
-		//Translação
+		// Translação
 		case KeyEvent.VK_RIGHT:
-			mundo.translacaoXYZ(2.0,0.0,0.0);
+			mundo.translacaoXYZ(2.0, 0.0, 0.0);
 			break;
 		case KeyEvent.VK_LEFT:
-			mundo.translacaoXYZ(-2.0,0.0,0.0);
+			mundo.translacaoXYZ(-2.0, 0.0, 0.0);
 			break;
 		case KeyEvent.VK_UP:
-			mundo.translacaoXYZ(0.0,-2.0,0.0);
+			mundo.translacaoXYZ(0.0, -2.0, 0.0);
 			break;
 		case KeyEvent.VK_DOWN:
-			mundo.translacaoXYZ(0.0,2.0,0.0);
+			mundo.translacaoXYZ(0.0, 2.0, 0.0);
 			break;
-		//Escala
+		// Escala
 		case KeyEvent.VK_PAGE_UP:
-			mundo.escalaXYZ(2.0,2.0);
+			mundo.escalaXYZ(2.0, 2.0);
 			break;
 		case KeyEvent.VK_PAGE_DOWN:
-			mundo.escalaXYZ(0.5,0.5);
+			mundo.escalaXYZ(0.5, 0.5);
 			break;
 		case KeyEvent.VK_1:
-			mundo.escalaXYZPtoFixo(0.5, new Ponto4D(-15.0,-15.0,0.0,0.0));
+			mundo.escalaXYZPtoFixo(0.5, new Ponto4D(-15.0, -15.0, 0.0, 0.0));
 			break;
 		case KeyEvent.VK_2:
-			mundo.escalaXYZPtoFixo(2.0, new Ponto4D(-15.0,-15.0,0.0,0.0));
+			mundo.escalaXYZPtoFixo(2.0, new Ponto4D(-15.0, -15.0, 0.0, 0.0));
 			break;
 		case KeyEvent.VK_3:
-			mundo.rotacaoZPtoFixo(10.0, new Ponto4D(-15.0,-15.0,0.0,0.0));
+			mundo.rotacaoZPtoFixo(10.0, new Ponto4D(-15.0, -15.0, 0.0, 0.0));
 			break;
 		}
-		
+
 		glDrawable.display();
 	}
 
@@ -179,14 +185,14 @@ public class Main implements GLEventListener, KeyListener, MouseListener, MouseM
 
 	@Override
 	public void mouseDragged(MouseEvent e) {
-		
+
 		mundo.setupClosestPoint(e.getX(), e.getY());
-		
-		if(! ehDesenho) {
-			
+
+		if (modo.equals(Modo.SELECAO)) {
+
 			x = e.getX();
 			y = e.getY();
-			
+
 			mundo.dragClosestPoint(e.getX(), e.getY());
 			glDrawable.display();
 		}
@@ -200,8 +206,10 @@ public class Main implements GLEventListener, KeyListener, MouseListener, MouseM
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		mundo.setupClosestPoint(e.getX(), e.getY());
-		mundo.changeSelection(e.getX(), e.getY());
+		if (modo.equals(Modo.SELECAO)) {
+			mundo.setupClosestPoint(e.getX(), e.getY());
+			mundo.changeSelection(e.getX(), e.getY());
+		}
 	}
 
 	@Override
@@ -214,18 +222,24 @@ public class Main implements GLEventListener, KeyListener, MouseListener, MouseM
 
 	@Override
 	public void mousePressed(MouseEvent arg0) {
-		if(ehDesenho) {
+		if (modo.equals(Modo.DESENHO)) {
 			x = arg0.getX();
-			y = arg0.getY();		
-			mundo.adicionarPonto(x, y);		
-			glDrawable.display();	
-		}else {
-			
-		}
-		
+			y = arg0.getY();
+			mundo.adicionarPonto(x, y);
+			glDrawable.display();
+		} 
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
 	}
+	
+	private void inverteModo() {
+		if (modo.equals(Modo.DESENHO)) {
+			modo = Modo.SELECAO;
+		} else {
+			modo = Modo.DESENHO;
+		}
+	}
+
 }

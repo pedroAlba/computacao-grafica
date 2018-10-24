@@ -1,7 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Supplier;
-import java.util.stream.DoubleStream;
+import java.util.stream.Collectors;
 
 import javax.media.opengl.GL;
 
@@ -135,11 +134,12 @@ public class Mundo {
 	}
 
 	public void changeSelection(int x, int y) {
-		System.out.println("change selection");
-		objetos.forEach(o -> {
-			if(o.isInside(x, y)) {
-				selecionado = o;
-			}
-		});
+		
+		List<ObjetoGrafico> objetosEncontrados = objetos.stream().filter(o -> o.isInside(x, y)).collect(Collectors.toList());
+		System.out.printf("Existem %d objetos no ponto selecionado\n", objetosEncontrados.size());
+		
+		if(!objetosEncontrados.isEmpty()) {
+			selecionado = objetosEncontrados.get(0);
+		}
 	}
 }
