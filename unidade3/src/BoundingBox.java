@@ -5,6 +5,7 @@ import javax.media.opengl.GL;
  * Contêm 6 valores de "bordas", tanto postivo como positivo
  */
 public final class BoundingBox {
+	
 	private double menorX;
 	private double menorY;
 	private double menorZ;
@@ -147,6 +148,5 @@ public final class BoundingBox {
 	public Ponto4D obterCentro() {
 		return centro;
 	}
-
 }
 

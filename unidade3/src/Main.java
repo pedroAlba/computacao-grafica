@@ -201,6 +201,7 @@ public class Main implements GLEventListener, KeyListener, MouseListener, MouseM
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		mundo.setupClosestPoint(e.getX(), e.getY());
+		mundo.changeSelection(e.getX(), e.getY());
 	}
 
 	@Override

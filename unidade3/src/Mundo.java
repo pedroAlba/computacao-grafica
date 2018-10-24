@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import java.util.stream.DoubleStream;
 
@@ -67,7 +66,6 @@ public class Mundo {
 	public void adicionarObjeto() {
 		current = new ObjetoGrafico();
 		getLast().atualizaBBox();
-		atualizaSelecionado();
 		this.objetos.add(current);
 	}
 
@@ -135,5 +133,14 @@ public class Mundo {
 		p.setX(((maiorX + menorX)  / 2) * -1);
 		p.setY(((maiorY + menorY)  / 2) * -1);
 		return p;
+	}
+
+	public void changeSelection(int x, int y) {
+		System.out.println("change selection");
+		objetos.forEach(o -> {
+			if(o.isInside(x, y)) {
+				selecionado = o;
+			}
+		});
 	}
 }

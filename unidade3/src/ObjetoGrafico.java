@@ -194,5 +194,12 @@ public class ObjetoGrafico {
 	public void exibeMatriz() {
 		matrizObjeto.exibeMatriz();
 	}
+
+	public boolean isInside(int x, int y) {
+		//TODO: Adicionar scanLine
+		return (x >= bbox.obterMenorX() && x <= bbox.obterMaiorX())
+				&&
+			   (y >= bbox.obterMenorY() && y <= bbox.obterMaiorY());
+	}
 	
 }
