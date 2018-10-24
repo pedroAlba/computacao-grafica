@@ -123,12 +123,10 @@ public class Mundo {
 
 	private Ponto4D getCentro() {
 		
-		Supplier<DoubleStream> x = () -> selecionado.getPontos().stream().mapToDouble(Ponto4D::getX);
-		Supplier<DoubleStream> y = () -> selecionado.getPontos().stream().mapToDouble(Ponto4D::getY);
-		double maiorX = x.get().max().getAsDouble();
-		double maiorY = y.get().max().getAsDouble();
-		double menorX = x.get().min().getAsDouble();
-		double menorY = y.get().min().getAsDouble();
+		double maiorX = selecionado.getPontos().stream().mapToDouble(Ponto4D::getX).max().getAsDouble();
+		double maiorY = selecionado.getPontos().stream().mapToDouble(Ponto4D::getY).max().getAsDouble();
+		double menorX = selecionado.getPontos().stream().mapToDouble(Ponto4D::getX).min().getAsDouble();
+		double menorY = selecionado.getPontos().stream().mapToDouble(Ponto4D::getY).min().getAsDouble();
 		
 		Ponto4D p = new Ponto4D();
 		p.setX(((maiorX + menorX)  / 2) * -1);
