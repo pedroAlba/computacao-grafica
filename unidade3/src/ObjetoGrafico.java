@@ -199,6 +199,12 @@ public class ObjetoGrafico {
 		return insideBBox(x, y) ? scanLine(x,y) : false;
 	}
 
+	/**
+	 * Verifica se as cordenadas X e Y estão dentro da Bbox
+	 * @param x eixo X
+	 * @param y eixo Y
+	 * @return {@code true} se o ponto está dentro da BBox
+	 */
 	private boolean insideBBox(int x, int y) {
 		return (x >= bbox.obterMenorX() && x <= bbox.obterMaiorX())
 				&&
@@ -206,10 +212,10 @@ public class ObjetoGrafico {
 	}
 	
 	/**
-	 * Verifica se as coordenadas X e Y estão "dentro" do poligono
-	 * @param x
-	 * @param y
-	 * @return
+	 * Verifica se as coordenadas X e Y estão dentro do poligono
+	 * @param x eixo X
+	 * @param y eixo Y
+	 * @return {@code true} se o ponto está dentro do poligono
 	 */
 	private boolean scanLine(int x, int y)
 	{
