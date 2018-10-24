@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Supplier;
 import java.util.stream.DoubleStream;
 
 import javax.media.opengl.GL;
@@ -122,12 +123,12 @@ public class Mundo {
 
 	private Ponto4D getCentro() {
 		
-		DoubleStream x = selecionado.getPontos().stream().mapToDouble(Ponto4D::getX);
-		DoubleStream y = selecionado.getPontos().stream().mapToDouble(Ponto4D::getY);
-		double maiorX = x.max().getAsDouble();
-		double maiorY = y.max().getAsDouble();
-		double menorX = x.min().getAsDouble();
-		double menorY = y.min().getAsDouble();
+		Supplier<DoubleStream> x = () -> selecionado.getPontos().stream().mapToDouble(Ponto4D::getX);
+		Supplier<DoubleStream> y = () -> selecionado.getPontos().stream().mapToDouble(Ponto4D::getY);
+		double maiorX = x.get().max().getAsDouble();
+		double maiorY = y.get().max().getAsDouble();
+		double menorX = x.get().min().getAsDouble();
+		double menorY = y.get().min().getAsDouble();
 		
 		Ponto4D p = new Ponto4D();
 		p.setX(((maiorX + menorX)  / 2) * -1);
