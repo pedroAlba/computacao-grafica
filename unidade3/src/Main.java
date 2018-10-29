@@ -168,6 +168,8 @@ public class Main implements GLEventListener, KeyListener, MouseListener, MouseM
 		case KeyEvent.VK_3:
 			mundo.rotacaoZPtoFixo(10.0, new Ponto4D(-15.0, -15.0, 0.0, 0.0));
 			break;
+		case KeyEvent.VK_DELETE:
+			mundo.deleteCurrent();
 		}
 
 		glDrawable.display();

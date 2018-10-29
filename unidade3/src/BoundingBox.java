@@ -148,5 +148,10 @@ public final class BoundingBox {
 	public Ponto4D obterCentro() {
 		return centro;
 	}
+
+	public void deletaBBox() {
+		atribuirBoundingBox(0,0,0,0,0,0);
+		atualizarBBox(0,0,0);
+	}
 }
 

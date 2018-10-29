@@ -264,4 +264,8 @@ public class ObjetoGrafico {
 		}
 		return null;
 	}
+
+	public void deletaBBox() {
+		bbox.deletaBBox();
+	}
 }

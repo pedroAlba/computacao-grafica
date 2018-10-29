@@ -142,4 +142,14 @@ public class Mundo {
 			selecionado = objetosEncontrados.get(0);
 		}
 	}
+
+	public void deleteCurrent() {
+		objetos.stream()
+				.filter(s -> s.equals(selecionado))
+				.findFirst()
+				.ifPresent(selected -> {
+					objetos.remove(selected);
+					selected.deletaBBox();
+				});
+	}
 }
