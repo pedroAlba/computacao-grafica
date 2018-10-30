@@ -128,10 +128,8 @@ public class Mundo {
 		DoubleSummaryStatistics x = pontos.stream().map(Ponto4D::getX).collect(Collectors.summarizingDouble(Double::doubleValue));
 		DoubleSummaryStatistics y = pontos.stream().map(Ponto4D::getY).collect(Collectors.summarizingDouble(Double::doubleValue));
 		
-		return new Ponto4D((x.getMax() + x.getMin() / 2),
-							   ((y.getMax() + y.getMin()  / 2) * -1),
-							   0,
-							   0);
+		return new Ponto4D( (((x.getMax() + x.getMin()) / 2) * -1),
+							(((y.getMax() + y.getMin()) / 2) * -1));
 		
 	}
 
