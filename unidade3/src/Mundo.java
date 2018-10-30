@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.DoubleSummaryStatistics;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -122,15 +123,16 @@ public class Mundo {
 
 	private Ponto4D getCentro() {
 		
-		double maiorX = selecionado.getPontos().stream().mapToDouble(Ponto4D::getX).max().getAsDouble();
-		double maiorY = selecionado.getPontos().stream().mapToDouble(Ponto4D::getY).max().getAsDouble();
-		double menorX = selecionado.getPontos().stream().mapToDouble(Ponto4D::getX).min().getAsDouble();
-		double menorY = selecionado.getPontos().stream().mapToDouble(Ponto4D::getY).min().getAsDouble();
+		List<Ponto4D> pontos = selecionado.getPontos();
 		
-		Ponto4D p = new Ponto4D();
-		p.setX(((maiorX + menorX)  / 2) * -1);
-		p.setY(((maiorY + menorY)  / 2) * -1);
-		return p;
+		DoubleSummaryStatistics x = pontos.stream().map(Ponto4D::getX).collect(Collectors.summarizingDouble(Double::doubleValue));
+		DoubleSummaryStatistics y = pontos.stream().map(Ponto4D::getY).collect(Collectors.summarizingDouble(Double::doubleValue));
+		
+		return new Ponto4D((x.getMax() + x.getMin() / 2),
+							   ((y.getMax() + y.getMin()  / 2) * -1),
+							   0,
+							   0);
+		
 	}
 
 	public void changeSelection(int x, int y) {
