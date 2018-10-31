@@ -20,6 +20,12 @@ public class ObjetoGrafico {
 	private int r, g, b, currentColor;
 	
 	private Transformacao4D matrizObjeto = new Transformacao4D();
+
+	/**
+	 * Variável de controle para saber se o objeto sofre alguma transformacao
+	 */
+	private boolean transformou = false;
+	
 	private static Transformacao4D matrizTmpTranslacao = new Transformacao4D();
 	private static Transformacao4D matrizTmpTranslacaoInversa = new Transformacao4D();
 	private static Transformacao4D matrizTmpEscala = new Transformacao4D();		
@@ -59,11 +65,10 @@ public class ObjetoGrafico {
 	
 		}
 		gl.glPopMatrix();
-		//desenhaBBox(gl);
 	}
 
 	public void desenhaBBox(GL gl) {
-		if  (!pontos.isEmpty()) {
+		if  (!pontos.isEmpty() && !transformou) {
 			bbox.desenharOpenGLBBox(gl);
 		}
 	}
@@ -144,12 +149,14 @@ public class ObjetoGrafico {
 	}
 	
 	public void translacaoXYZ(double tx, double ty, double tz) {
+		transformou = true;
 		Transformacao4D matrizTranslate = new Transformacao4D();
 		matrizTranslate.atribuirTranslacao(tx,ty,tz);
 		matrizObjeto = matrizTranslate.transformMatrix(matrizObjeto);		
 	}
 
 	public void escalaXYZ(double Sx,double Sy) {
+		transformou = true;
 		Transformacao4D matrizScale = new Transformacao4D();		
 		matrizScale.atribuirEscala(Sx,Sy,1.0);
 		matrizObjeto = matrizScale.transformMatrix(matrizObjeto);
@@ -160,6 +167,7 @@ public class ObjetoGrafico {
 	}
 
 	public void escalaXYZPtoFixo(double escala, Ponto4D ptoFixo) {
+		transformou = true;
 		matrizGlobal.atribuirIdentidade();
 
 		matrizTmpTranslacao.atribuirTranslacao(ptoFixo.getX(),ptoFixo.getY(),ptoFixo.getZ());
@@ -176,6 +184,7 @@ public class ObjetoGrafico {
 	}
 	
 	public void rotacaoZPtoFixo(double angulo, Ponto4D ptoFixo) {
+		transformou = true;
 		matrizGlobal.atribuirIdentidade();
 
 		matrizTmpTranslacao.atribuirTranslacao(ptoFixo.getX(),ptoFixo.getY(),ptoFixo.getZ());
@@ -196,6 +205,9 @@ public class ObjetoGrafico {
 	}
 
 	public boolean isInside(int x, int y) {
+		
+		if(transformou) return false;
+		
 		return insideBBox(x, y) ? scanLine(x,y) : false;
 	}
 
@@ -267,5 +279,9 @@ public class ObjetoGrafico {
 
 	public void deletaBBox() {
 		bbox.deletaBBox();
+	}
+	
+	public boolean isTransformado() {
+		return transformou;
 	}
 }
