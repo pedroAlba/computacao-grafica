@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.DoubleSummaryStatistics;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -82,7 +83,8 @@ public class Mundo {
 			//Logo, o objeto adicionado aqui sempre vai ser filho do anterior.
 			this.objetos.add(current);
 		} else {
-			selecionado.getFilhos().add(current);
+			selecionado.setFilhos(current);
+//			selecionado.getFilhos().add(current);
 		}
 	}
 
@@ -165,10 +167,29 @@ public class Mundo {
 		} 
 		return null;		
 	}
+	
+//	Metodo que deve ser migrado para OG
+	public List<ObjetoGrafico> procuraFilhos(ObjetoGrafico pai){
+		List<ObjetoGrafico> encontrados = new ArrayList<>();
+		for (ObjetoGrafico og : pai.getFilhos()) {
+			encontrados.add(og);
+			encontrados.addAll(procuraFilhos(og));
+		}
+		return encontrados;
+	}
 
 	public void changeSelection(int x, int y) {
 		
 		List<ObjetoGrafico> objetosEncontrados = objetos.stream().filter(o -> o.isInside(x, y)).collect(Collectors.toList());
+//		Gambi 1
+		List<ObjetoGrafico> filhos = new ArrayList<>();
+		for (ObjetoGrafico o : objetos) {
+			filhos.addAll(procuraFilhos(o));
+		}
+		List<ObjetoGrafico> filhosEncontrados = filhos.stream().filter(o -> o.isInside(x, y)).collect(Collectors.toList());
+		objetosEncontrados.addAll(filhosEncontrados);
+//		Fim da Gambi 1
+		
 		System.out.printf("Existem %d objetos no ponto selecionado\n", objetosEncontrados.size());
 		
 		if(!objetosEncontrados.isEmpty()) {
@@ -177,6 +198,7 @@ public class Mundo {
 			selecionado = null;
 		}
 	}
+
 
 	public void deleteCurrent() {
 		if  (!(selecionado == null))
