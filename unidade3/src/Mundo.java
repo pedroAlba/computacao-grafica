@@ -51,10 +51,19 @@ public class Mundo {
 	 * @param y coordenada y
 	 */
 	void adicionarPonto(double x, double y) {
+		//Gambiarra aqui:
+		//Verifica se selecionado é nulo, se sim, insere um objeto no mundo
+		//Isso foi feito pq ao inserir um objeto ao apertar espaço, ele sempre vai ser filho
+		//do anterior
+		if  (selecionado == null) {
+			current = new ObjetoGrafico();
+			this.objetos.add(current);
+			selecionado = current;
+		}
 		if  (getLast().getPontos().isEmpty()) {
 			atualizaSelecionado();
 		}
-		getLast().adicionarPonto(x, y,0,0);
+		selecionado.adicionarPonto(x, y,0,0);
 	}
 
 	private ObjetoGrafico atualizaSelecionado() {
@@ -66,8 +75,15 @@ public class Mundo {
 	 */
 	public void adicionarObjeto() {
 		current = new ObjetoGrafico();
-		getLast().atualizaBBox();
-		this.objetos.add(current);
+		selecionado.atualizaBBox();
+		if  (selecionado == null) {
+			//Esse código nunca vai executar, pois esse método é chamado ao apertar espaço
+			//para inserir um novo objeto, e o selecionado sempre vai ser ultimo objeto inserido.
+			//Logo, o objeto adicionado aqui sempre vai ser filho do anterior.
+			this.objetos.add(current);
+		} else {
+			selecionado.getFilhos().add(current);
+		}
 	}
 
 	public void setPrimitiva(int primitiva) {
@@ -85,6 +101,10 @@ public class Mundo {
 	}
 	
 	private ObjetoGrafico getLast() {
+		if  (!(selecionado == null)){
+			if  (!selecionado.getFilhos().isEmpty())
+				return selecionado.getFilhos().get(selecionado.getFilhos().size() - 1);
+		} 
 		return objetos.get(objetos.size() - 1);
 	}
 

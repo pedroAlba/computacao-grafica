@@ -12,7 +12,7 @@ import javax.media.opengl.GL;
 public class ObjetoGrafico {
 
 	private List<Ponto4D> pontos = new ArrayList<>();
-	private List<ObjetoGrafico> filhos;
+	private List<ObjetoGrafico> filhos = new ArrayList<ObjetoGrafico>();
 	
 	private int primitiva;
 	
@@ -305,4 +305,5 @@ public class ObjetoGrafico {
 	public List<ObjetoGrafico> getFilhos() {
 		return this.filhos;
 	}
+	
 }
