@@ -64,6 +64,7 @@ public class Main implements GLEventListener, KeyListener, MouseListener, MouseM
 
 		mundo.getObjetos().forEach(o -> o.desenha(gl));
 		mundo.desenhaBBox(gl);
+		
 		gl.glFlush();
 	}
 

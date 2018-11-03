@@ -12,6 +12,7 @@ import javax.media.opengl.GL;
 public class ObjetoGrafico {
 
 	private List<Ponto4D> pontos = new ArrayList<>();
+	private List<ObjetoGrafico> filhos;
 	
 	private int primitiva;
 	
@@ -35,6 +36,7 @@ public class ObjetoGrafico {
 	public ObjetoGrafico(int primitiva) {
 		this.primitiva = primitiva;
 		this.bbox = new BoundingBox();
+		filhos = new ArrayList<>();
 	}
 
 	void desenha(GL gl) {
@@ -44,6 +46,7 @@ public class ObjetoGrafico {
 	public ObjetoGrafico() {
 		this.primitiva = GL.GL_LINE_STRIP;
 		this.bbox = new BoundingBox();
+		filhos = new ArrayList<>();
 	}
 	/**
 	 * Itera sobre todos os pontos, e inicia um desenho na tela, com base na primitiva definida na variavel {@link primitiva}
@@ -64,6 +67,16 @@ public class ObjetoGrafico {
 			gl.glEnd();
 	
 		}
+//		Questão 13
+//		Opção 1
+		getFilhos().forEach(o -> o.desenhaLinhas(gl));
+//		Opção 2
+/**
+		for (ObjetoGrafico filho : filhos) {
+			filho.desenhaLinhas(gl);
+		}
+*/
+		
 		gl.glPopMatrix();
 	}
 
@@ -283,5 +296,13 @@ public class ObjetoGrafico {
 	
 	public boolean isTransformado() {
 		return transformou;
+	}
+	
+	public void setFilhos(ObjetoGrafico f) {
+		filhos.add(f);
+	}
+	
+	public List<ObjetoGrafico> getFilhos() {
+		return this.filhos;
 	}
 }
