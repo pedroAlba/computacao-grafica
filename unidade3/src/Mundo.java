@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.DoubleSummaryStatistics;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -89,13 +88,15 @@ public class Mundo {
 	}
 
 	public void setPrimitiva(int primitiva) {
-		if  (!(selecionado == null))
+		if(temSelecionado()) {
 			selecionado.setPrimitiva(primitiva);
+		}
 	}
 
 	public void mudaCor() {
-		if  (!(selecionado == null))
+		if(temSelecionado()) {
 			selecionado.mudaCor();
+		}
 	}
 
 	public void dragCurrent(int x, int y) {
@@ -103,15 +104,18 @@ public class Mundo {
 	}
 	
 	private ObjetoGrafico getLast() {
-		if  (!(selecionado == null)){
+		if (temSelecionado()) {
 			if  (!selecionado.getFilhos().isEmpty())
 				return selecionado.getFilhos().get(selecionado.getFilhos().size() - 1);
 		} 
 		return objetos.get(objetos.size() - 1);
 	}
 
+	private boolean temSelecionado() {
+		return selecionado != null;
+	}
 	public void dragClosestPoint(int newX, int newY) {
-		if  (!(selecionado == null)){
+		if (temSelecionado()) {
 			currentPoint.setX(newX);
 			currentPoint.setY(newY);
 			selecionado.atualizaBBox();
@@ -119,43 +123,50 @@ public class Mundo {
 	}
 
 	public void setupClosestPoint(int x, int y) {
-		if  (!(selecionado == null))
+		if(temSelecionado()) {
 			currentPoint = selecionado.searchClosest(x, y);
+		}
 	}
 
 	public void deleteCurrentPoint() {
-		if  (!(selecionado == null))
+		if(temSelecionado()) {
 			selecionado.getPontos().removeIf(p -> p.getX() == currentPoint.getX() &&
-											      p.getY() == currentPoint.getY());
+				      p.getY() == currentPoint.getY());
+		}
 	}
 
 	public void desenhaBBox(GL gl) {
-		if  (!(selecionado == null))
+		if(temSelecionado()) {
 			selecionado.desenhaBBox(gl);
+		}
 	}
 	
 	public void translacaoXYZ(double tx, double ty, double tz){
-		if  (!(selecionado == null))
-			selecionado.translacaoXYZ(tx, ty, tz);		
+		if(temSelecionado()) {
+			selecionado.translacaoXYZ(tx, ty, tz);
+		}
 	}
 	
 	public void escalaXYZ(double Sx,double Sy) {
-		if  (!(selecionado == null))
+		if(temSelecionado()) {
 			selecionado.escalaXYZ(Sx, Sy);
+		}
 	}
 	
 	public void escalaXYZPtoFixo(double escala, Ponto4D ptoFixo) {
-		if  (!(selecionado == null))
+		if(temSelecionado()) {
 			selecionado.escalaXYZPtoFixo(escala, getCentro());
+		}
 	}
 
 	public void rotacaoZPtoFixo(double angulo, Ponto4D ptoFixo) {
-		if  (!(selecionado == null))
+		if(temSelecionado()) {
 			selecionado.rotacaoZPtoFixo(angulo, getCentro() );
+		}
 	}
 
 	private Ponto4D getCentro() {
-		if  (!(selecionado == null)) {
+		if(temSelecionado()) {
 		
 			List<Ponto4D> pontos = selecionado.getPontos();
 		
@@ -201,7 +212,7 @@ public class Mundo {
 
 
 	public void deleteCurrent() {
-		if  (!(selecionado == null))
+		if(temSelecionado()) {
 			objetos.stream()
 		   		   .filter(s -> s.equals(selecionado))
 				   .findFirst()
@@ -210,5 +221,6 @@ public class Mundo {
 					  selected.deletaBBox();
 				   });
 		
+		}
 	}
 }
