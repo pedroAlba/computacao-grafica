@@ -29,3 +29,6 @@ bin
 *.log
 *.swp
 *.bak
+
+*.classpath
+*.project

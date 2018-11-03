@@ -2,7 +2,7 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="jogl.jar"/>
-	<classpathentry kind="lib" path="C:/GIT/ComputacaoGrafica/Trabalho3/gluegen-rt.jar"/>
+	<classpathentry kind="lib" path="C:/FURB/_java_N3/_java_N3/CG-N3_Trasnformacao/gluegen-rt.jar"/>
+	<classpathentry kind="lib" path="C:/FURB/_java_N3/_java_N3/CG-N3_Trasnformacao/jogl.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
