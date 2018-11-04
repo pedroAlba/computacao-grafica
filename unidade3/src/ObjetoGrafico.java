@@ -1,7 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.TreeMap;
 
 import javax.media.opengl.GL;
@@ -221,14 +220,6 @@ public class ObjetoGrafico {
 	public boolean isInside(int x, int y) {
 		
 		if(transformou) return false;
-		
-		Optional<ObjetoGrafico> filhoEncontrado = filhos.stream().filter(obj -> {
-						return obj.isInside(x, y); 
-		}).findAny();
-		
-		if(filhoEncontrado.isPresent()) {
-			return true;
-		}
 		
 		return insideBBox(x, y) ? scanLine(x,y) : false;
 	}
