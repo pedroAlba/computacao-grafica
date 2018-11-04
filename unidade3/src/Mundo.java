@@ -19,12 +19,9 @@ public class Mundo {
 	
 	private ObjetoGrafico current;
 	
-	private Camera camera;
-	
 	private Ponto4D currentPoint;
 	
 	private Mundo() {
-		this.camera = new Camera();
 		ObjetoGrafico o = new ObjetoGrafico(GL.GL_LINE_STRIP);
 		objetos.add(o);
 		selecionado = o; 
@@ -37,10 +34,6 @@ public class Mundo {
 		return instance;
 	}	
 	
-	public Camera getCamera() {
-		return camera;
-	}
-
 	public List<ObjetoGrafico> getObjetos() {
 		return objetos;
 	}
@@ -51,10 +44,6 @@ public class Mundo {
 	 * @param y coordenada y
 	 */
 	void adicionarPonto(double x, double y) {
-		//Gambiarra aqui:
-		//Verifica se selecionado é nulo, se sim, insere um objeto no mundo
-		//Isso foi feito pq ao inserir um objeto ao apertar espaço, ele sempre vai ser filho
-		//do anterior
 		if  (selecionado == null) {
 			current = new ObjetoGrafico();
 			this.objetos.add(current);
@@ -77,13 +66,9 @@ public class Mundo {
 		current = new ObjetoGrafico();
 		selecionado.atualizaBBox();
 		if  (selecionado == null) {
-			//Esse código nunca vai executar, pois esse método é chamado ao apertar espaço
-			//para inserir um novo objeto, e o selecionado sempre vai ser ultimo objeto inserido.
-			//Logo, o objeto adicionado aqui sempre vai ser filho do anterior.
 			this.objetos.add(current);
 		} else {
 			selecionado.setFilhos(current);
-//			selecionado.getFilhos().add(current);
 		}
 	}
 
@@ -178,16 +163,6 @@ public class Mundo {
 		} 
 		return null;		
 	}
-	
-//	Metodo que deve ser migrado para OG
-//	public List<ObjetoGrafico> procuraFilhos(ObjetoGrafico pai){
-//		List<ObjetoGrafico> encontrados = new ArrayList<>();
-//		for (ObjetoGrafico og : pai.getFilhos()) {
-//			encontrados.add(og);
-//			encontrados.addAll(procuraFilhos(og));
-//		}
-//		return encontrados;
-//	}
 
 	public void changeSelection(int x, int y) {
 		
@@ -199,16 +174,6 @@ public class Mundo {
 		
 		List<ObjetoGrafico> objetosEncontrados = todosObjetos.stream().filter(o -> o.isInside(x, y)).collect(Collectors.toList());
 		
-//		List<ObjetoGrafico> objetosEncontrados = objetos.stream().filter(o -> o.isInside(x, y)).collect(Collectors.toList());
-//		//		Gambi 1
-//		List<ObjetoGrafico> filhos = new ArrayList<>();
-//		for (ObjetoGrafico o : objetos) {
-//			filhos.addAll(procuraFilhos(o));
-//		}
-//		List<ObjetoGrafico> filhosEncontrados = filhos.stream().filter(o -> o.isInside(x, y)).collect(Collectors.toList());
-//		objetosEncontrados.addAll(filhosEncontrados);
-////		Fim da Gambi 1
-		
 		System.out.printf("Existem %d objetos no ponto selecionado\n", objetosEncontrados.size());
 		
 		if(!objetosEncontrados.isEmpty()) {
@@ -217,7 +182,6 @@ public class Mundo {
 			selecionado = null;
 		}
 	}
-
 
 	public void deleteCurrent() {
 		if(temSelecionado()) {

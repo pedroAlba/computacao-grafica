@@ -67,16 +67,7 @@ public class ObjetoGrafico {
 			gl.glEnd();
 	
 		}
-//		Questão 13
-//		Opção 1
 		getFilhos().forEach(o -> o.desenhaLinhas(gl));
-//		Opção 2
-/**
-		for (ObjetoGrafico filho : filhos) {
-			filho.desenhaLinhas(gl);
-		}
-*/
-		
 		gl.glPopMatrix();
 	}
 
@@ -306,7 +297,6 @@ public class ObjetoGrafico {
 		return this.filhos;
 	}
 	
-//	Questão 13
 	public List<ObjetoGrafico> retornaDescendentes(ObjetoGrafico og){
 		List<ObjetoGrafico> retorno = new ArrayList<>();
 		for (ObjetoGrafico o : og.getFilhos()) {
