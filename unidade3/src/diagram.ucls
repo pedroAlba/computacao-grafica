@@ -3,143 +3,240 @@
   realizations="true" associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
   <class id="1" language="java" name="Ponto4D" project="Unidade03" file="/Unidade03/src/Ponto4D.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1413" y="906"/>    
+    <position height="369" width="211" x="961" y="2744"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="2" language="java" name="Main" project="Unidade03" file="/Unidade03/src/Main.java" binary="false" 
+  <enumeration id="2" language="java" name="Modo" project="Unidade03" file="/Unidade03/src/Modo.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="571" y="389"/>    
+    <position height="117" width="119" x="414" y="1011"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
-  </class>  
-  <class id="3" language="java" name="Frame" project="Unidade03" file="/Unidade03/src/Frame.java" binary="false" 
+  </enumeration>  
+  <enumeration id="3" language="java" name="Estado" project="Unidade03" file="/Unidade03/src/Estado.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="297" y="235"/>    
+    <position height="117" width="119" x="295" y="247"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </enumeration>  
+  <class id="4" language="java" name="Main" project="Unidade03" file="/Unidade03/src/Main.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="567" width="300" x="496" y="404"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="4" language="java" name="ObjetoGrafico" project="Unidade03" file="/Unidade03/src/ObjetoGrafico.java" 
+  <class id="5" language="java" name="Frame" project="Unidade03" file="/Unidade03/src/Frame.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="117" width="131" x="496" y="247"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="ObjetoGrafico" project="Unidade03" file="/Unidade03/src/ObjetoGrafico.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1199" y="490"/>    
+    <position height="675" width="305" x="573" y="1520"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="5" language="java" name="Transformacao4D" project="Unidade03" file="/Unidade03/src/Transformacao4D.java" 
+  <class id="7" language="java" name="Transformacao4D" project="Unidade03" file="/Unidade03/src/Transformacao4D.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="884" y="291"/>    
+    <position height="351" width="287" x="252" y="2245"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="6" language="java" name="Camera" project="Unidade03" file="/Unidade03/src/Camera.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1449" y="487"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="7" language="java" name="BoundingBox" project="Unidade03" file="/Unidade03/src/BoundingBox.java" 
+  <class id="8" language="java" name="BoundingBox" project="Unidade03" file="/Unidade03/src/BoundingBox.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="968" y="911"/>    
+    <position height="459" width="361" x="579" y="2245"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="8" language="java" name="Mundo" project="Unidade03" file="/Unidade03/src/Mundo.java" binary="false" 
+  <class id="9" language="java" name="Mundo" project="Unidade03" file="/Unidade03/src/Mundo.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1319" y="198"/>    
+    <position height="459" width="232" x="573" y="1011"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <association id="9">    
-    <end type="SOURCE" refId="7" navigable="false">      
-      <attribute id="10" name="centro"/>      
-      <multiplicity id="11" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="1" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="12">    
+  <association id="10">    
+    <bendpoint x="694" y="373"/>    
     <end type="SOURCE" refId="4" navigable="false">      
-      <attribute id="13" name="pontos"/>      
-      <multiplicity id="14" minimum="0" maximum="2147483647"/>    
+      <attribute id="11" name="frame"/>      
+      <multiplicity id="12" minimum="0" maximum="1"/>    
     </end>    
-    <end type="TARGET" refId="1" navigable="true"/>    
+    <end type="TARGET" refId="5" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="15">    
-    <bendpoint x="1117" y="199"/>    
-    <bendpoint x="1119" y="295"/>    
-    <bendpoint x="1124" y="350"/>    
-    <end type="SOURCE" refId="8" navigable="false">      
-      <attribute id="16" name="objetos"/>      
-      <multiplicity id="17" minimum="0" maximum="2147483647"/>    
+  <association id="13">    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="14" name="renderer"/>      
+      <multiplicity id="15" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="4" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="18">    
-    <end type="SOURCE" refId="8" navigable="false">      
-      <attribute id="19" name="camera"/>      
-      <multiplicity id="20" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="6" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="21">    
-    <bendpoint x="1311" y="339"/>    
-    <end type="SOURCE" refId="8" navigable="false">      
-      <attribute id="22" name="objetoSelecionado"/>      
-      <multiplicity id="23" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="4" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="24">    
-    <end type="SOURCE" refId="8" navigable="false">      
-      <attribute id="25" name="instance"/>      
-      <multiplicity id="26" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="8" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="27">    
-    <end type="SOURCE" refId="4" navigable="false">      
-      <attribute id="28" name="bbox"/>      
-      <multiplicity id="29" minimum="0" maximum="1"/>    
+  <association id="16">    
+    <bendpoint x="160" y="2170"/>    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="17" name="matrizGlobal"/>      
+      <multiplicity id="18" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="7" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="30">    
-    <bendpoint x="291" y="394"/>    
-    <end type="SOURCE" refId="3" navigable="false">      
-      <attribute id="31" name="renderer"/>      
-      <multiplicity id="32" minimum="0" maximum="1"/>    
+  <association id="19">    
+    <bendpoint x="345" y="2131"/>    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="20" name="matrizTmpEscala"/>      
+      <multiplicity id="21" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="22">    
+    <bendpoint x="1289" y="2506"/>    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="23" name="pontos"/>      
+      <multiplicity id="24" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="25">    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="26" name="modo"/>      
+      <multiplicity id="27" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="28">    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="29" name="centro"/>      
+      <multiplicity id="30" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="31">    
+    <end type="SOURCE" refId="9" navigable="false">      
+      <attribute id="32" name="instance"/>      
+      <multiplicity id="33" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="34">    
+    <bendpoint x="495" y="1487"/>    
+    <end type="SOURCE" refId="9" navigable="false">      
+      <attribute id="35" name="selecionado"/>      
+      <multiplicity id="36" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="6" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="37">    
+    <end type="SOURCE" refId="9" navigable="false">      
+      <attribute id="38" name="current"/>      
+      <multiplicity id="39" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="6" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="40">    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="41" name="bbox"/>      
+      <multiplicity id="42" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="8" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="43">    
+    <bendpoint x="916" y="1568"/>    
+    <end type="SOURCE" refId="9" navigable="false">      
+      <attribute id="44" name="objetos"/>      
+      <multiplicity id="45" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="6" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="46">    
+    <bendpoint x="555" y="2214"/>    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="47" name="matrizTmpTranslacao"/>      
+      <multiplicity id="48" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="49">    
+    <bendpoint x="85" y="2212"/>    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="50" name="matrizObjeto"/>      
+      <multiplicity id="51" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="52">    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="53" name="mundo"/>      
+      <multiplicity id="54" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="55">    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="56" name="filhos"/>      
+      <multiplicity id="57" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="6" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="58">    
+    <bendpoint x="401" y="2126"/>    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="59" name="matrizTmpTranslacaoInversa">        
+        <position height="18" width="147" x="402" y="2156"/>      
+      </attribute>      
+      <multiplicity id="60" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="61">    
+    <bendpoint x="991" y="1520"/>    
+    <bendpoint x="991" y="2245"/>    
+    <end type="SOURCE" refId="9" navigable="false">      
+      <attribute id="62" name="currentPoint"/>      
+      <multiplicity id="63" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
