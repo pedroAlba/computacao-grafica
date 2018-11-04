@@ -180,26 +180,34 @@ public class Mundo {
 	}
 	
 //	Metodo que deve ser migrado para OG
-	public List<ObjetoGrafico> procuraFilhos(ObjetoGrafico pai){
-		List<ObjetoGrafico> encontrados = new ArrayList<>();
-		for (ObjetoGrafico og : pai.getFilhos()) {
-			encontrados.add(og);
-			encontrados.addAll(procuraFilhos(og));
-		}
-		return encontrados;
-	}
+//	public List<ObjetoGrafico> procuraFilhos(ObjetoGrafico pai){
+//		List<ObjetoGrafico> encontrados = new ArrayList<>();
+//		for (ObjetoGrafico og : pai.getFilhos()) {
+//			encontrados.add(og);
+//			encontrados.addAll(procuraFilhos(og));
+//		}
+//		return encontrados;
+//	}
 
 	public void changeSelection(int x, int y) {
 		
-		List<ObjetoGrafico> objetosEncontrados = objetos.stream().filter(o -> o.isInside(x, y)).collect(Collectors.toList());
-//		Gambi 1
-		List<ObjetoGrafico> filhos = new ArrayList<>();
-		for (ObjetoGrafico o : objetos) {
-			filhos.addAll(procuraFilhos(o));
+		List<ObjetoGrafico> todosObjetos = new ArrayList<>();
+		for (ObjetoGrafico og : objetos) {
+			todosObjetos.add(og);
+			todosObjetos.addAll(og.retornaDescendentes(og));
 		}
-		List<ObjetoGrafico> filhosEncontrados = filhos.stream().filter(o -> o.isInside(x, y)).collect(Collectors.toList());
-		objetosEncontrados.addAll(filhosEncontrados);
-//		Fim da Gambi 1
+		
+		List<ObjetoGrafico> objetosEncontrados = todosObjetos.stream().filter(o -> o.isInside(x, y)).collect(Collectors.toList());
+		
+//		List<ObjetoGrafico> objetosEncontrados = objetos.stream().filter(o -> o.isInside(x, y)).collect(Collectors.toList());
+//		//		Gambi 1
+//		List<ObjetoGrafico> filhos = new ArrayList<>();
+//		for (ObjetoGrafico o : objetos) {
+//			filhos.addAll(procuraFilhos(o));
+//		}
+//		List<ObjetoGrafico> filhosEncontrados = filhos.stream().filter(o -> o.isInside(x, y)).collect(Collectors.toList());
+//		objetosEncontrados.addAll(filhosEncontrados);
+////		Fim da Gambi 1
 		
 		System.out.printf("Existem %d objetos no ponto selecionado\n", objetosEncontrados.size());
 		

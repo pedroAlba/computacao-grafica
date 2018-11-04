@@ -306,4 +306,14 @@ public class ObjetoGrafico {
 		return this.filhos;
 	}
 	
+//	Questão 13
+	public List<ObjetoGrafico> retornaDescendentes(ObjetoGrafico og){
+		List<ObjetoGrafico> retorno = new ArrayList<>();
+		for (ObjetoGrafico o : og.getFilhos()) {
+			retorno.add(o);
+			retorno.addAll(retornaDescendentes(o));
+		}
+		return retorno;
+	}
+	
 }
