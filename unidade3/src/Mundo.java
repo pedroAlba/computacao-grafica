@@ -189,6 +189,9 @@ public class Mundo {
 							  selected.deletaBBox();
 						   });
 		}
+		if(objetos.isEmpty()) {
+			selecionado = null;
+		}
 	}
 
 	private List<ObjetoGrafico> buscaTodos() {
