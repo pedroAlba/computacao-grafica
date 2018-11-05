@@ -166,13 +166,7 @@ public class Mundo {
 
 	public void changeSelection(int x, int y) {
 		
-		List<ObjetoGrafico> todosObjetos = new ArrayList<>();
-		for (ObjetoGrafico og : objetos) {
-			todosObjetos.add(og);
-			todosObjetos.addAll(og.retornaDescendentes(og));
-		}
-		
-		List<ObjetoGrafico> objetosEncontrados = todosObjetos.stream().filter(o -> o.isInside(x, y)).collect(Collectors.toList());
+		List<ObjetoGrafico> objetosEncontrados = buscaTodos().stream().filter(o -> o.isInside(x, y)).collect(Collectors.toList());
 		
 		System.out.printf("Existem %d objetos no ponto selecionado\n", objetosEncontrados.size());
 		
@@ -184,13 +178,9 @@ public class Mundo {
 	}
 
 	public void deleteCurrent() {
-		List<ObjetoGrafico> todosObjetos = new ArrayList<>();
-		for (ObjetoGrafico og : objetos) {
-			todosObjetos.add(og);
-			todosObjetos.addAll(og.retornaDescendentes(og));
-		}
+		
 		if(temSelecionado()) {
-			todosObjetos.stream()
+			buscaTodos().stream()
 				   		   .filter(s -> s.equals(selecionado))
 						   .findFirst()
 						   .ifPresent(selected -> {
@@ -199,5 +189,14 @@ public class Mundo {
 							  selected.deletaBBox();
 						   });
 		}
+	}
+
+	private List<ObjetoGrafico> buscaTodos() {
+		List<ObjetoGrafico> todosObjetos = new ArrayList<>();
+		for (ObjetoGrafico og : objetos) {
+			todosObjetos.add(og);
+			todosObjetos.addAll(og.retornaDescendentes(og));
+		}
+		return todosObjetos;
 	}
 }
