@@ -34,10 +34,6 @@ public class Mundo {
 		return instance;
 	}	
 	
-	public List<ObjetoGrafico> getObjetos() {
-		return objetos;
-	}
-	
 	/**
 	 * Adiciona um novo ponto, no ultimo objeto inserido na lista
 	 * @param x coordenada x
@@ -99,6 +95,12 @@ public class Mundo {
 	private boolean temSelecionado() {
 		return selecionado != null;
 	}
+	
+	/**
+	 * Altera as coordenadas do ponto atual
+	 * @param newX novo valor de x
+	 * @param newY novo valor de y
+	 */
 	public void dragClosestPoint(int newX, int newY) {
 		if (temSelecionado()) {
 			currentPoint.setX(newX);
@@ -107,12 +109,20 @@ public class Mundo {
 		}
 	}
 
+	/**
+	 * Define a variavel {@code curretPoint} com o ponto mais proximo do objeto selecionado
+	 * @param x
+	 * @param y
+	 */
 	public void setupClosestPoint(int x, int y) {
 		if(temSelecionado()) {
 			currentPoint = selecionado.searchClosest(x, y);
 		}
 	}
 
+	/**
+	 * Deleta o ponto referenciado pela variavel {@code currentPoint} do {@code objetoSelecionado}
+	 */
 	public void deleteCurrentPoint() {
 		if(temSelecionado()) {
 			selecionado.getPontos().removeIf(p -> p.getX() == currentPoint.getX() &&
@@ -150,6 +160,10 @@ public class Mundo {
 		}
 	}
 
+	/**
+	 * Retorna o ponto que representa o centro do objeto selecionado
+	 * @return
+	 */
 	private Ponto4D getCentro() {
 		if(temSelecionado()) {
 		
@@ -164,6 +178,11 @@ public class Mundo {
 		return null;		
 	}
 
+	/**
+	 * Percorre a lista de todos os objetos e faz um filtro com o método {@code ObjetoGrafico.isInside} da classe {@link ObjetoGrafico}
+	 * @param x
+	 * @param y
+	 */
 	public void changeSelection(int x, int y) {
 		
 		List<ObjetoGrafico> objetosEncontrados = buscaTodos().stream().filter(o -> o.isInside(x, y)).collect(Collectors.toList());
@@ -177,8 +196,10 @@ public class Mundo {
 		}
 	}
 
+	/**
+	 * Deleta o objeto selecionado
+	 */
 	public void deleteCurrent() {
-		
 		if(temSelecionado()) {
 			buscaTodos().stream()
 				   		   .filter(s -> s.equals(selecionado))
@@ -189,11 +210,16 @@ public class Mundo {
 							  selected.deletaBBox();
 						   });
 		}
+		
 		if(objetos.isEmpty()) {
 			selecionado = null;
 		}
 	}
 
+	/**
+	 * Busca todos os objetos presentes no contexto da aplicação
+	 * @return
+	 */
 	private List<ObjetoGrafico> buscaTodos() {
 		List<ObjetoGrafico> todosObjetos = new ArrayList<>();
 		for (ObjetoGrafico og : objetos) {
@@ -201,5 +227,10 @@ public class Mundo {
 			todosObjetos.addAll(og.retornaDescendentes(og));
 		}
 		return todosObjetos;
+	}
+	
+	
+	public List<ObjetoGrafico> getObjetos() {
+		return objetos;
 	}
 }

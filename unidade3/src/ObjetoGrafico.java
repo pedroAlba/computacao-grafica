@@ -142,8 +142,14 @@ public class ObjetoGrafico {
 		}
 	}
 
+	/**
+	 * Procura o ponto mais próximo com base nas coordenadas passadas por parametro
+	 * @param x
+	 * @param y
+	 * @return
+	 */
 	public Ponto4D searchClosest(int x, int y) {
-		Map<Double, Ponto4D> distancias = new TreeMap();
+		Map<Double, Ponto4D> distancias = new TreeMap<>();
 		for (Ponto4D ponto4d : pontos) {
 			distancias.put(Math.pow((x - ponto4d.getX()),2) + Math.pow((y - ponto4d.getY()),2), ponto4d);
 		}
@@ -296,6 +302,11 @@ public class ObjetoGrafico {
 		return this.filhos;
 	}
 	
+	/**
+	 * Busca todos os filhos do objeto atual, com base nos filhos
+	 * @param og
+	 * @return
+	 */
 	public List<ObjetoGrafico> retornaDescendentes(ObjetoGrafico og){
 		List<ObjetoGrafico> retorno = new ArrayList<>();
 		for (ObjetoGrafico o : og.getFilhos()) {
@@ -309,6 +320,11 @@ public class ObjetoGrafico {
 		return OID;
 	}
 
+	/**
+	 * Procura, na lista de filhos, um objeto com o mesmo OID. Caso encontre, deleta
+	 * Chamado de forma recursiva em todos os filhos.
+	 * @param oid2
+	 */
 	public void procuraEDeleta(String oid2) {
 		
 		Optional<ObjetoGrafico> found = filhos.stream().filter(f -> f.getOID().equals(oid2)).findAny();
