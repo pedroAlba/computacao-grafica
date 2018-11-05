@@ -49,7 +49,7 @@ public class Mundo {
 			this.objetos.add(current);
 			selecionado = current;
 		}
-		if  (getLast().getPontos().isEmpty()) {
+		if  (! objetos.isEmpty() && getLast().getPontos().isEmpty()) {
 			atualizaSelecionado();
 		}
 		selecionado.adicionarPonto(x, y,0,0);
@@ -68,7 +68,7 @@ public class Mundo {
 		if  (selecionado == null) {
 			this.objetos.add(current);
 		} else {
-			selecionado.setFilhos(current);
+			selecionado.adicionaFilho(current);
 		}
 	}
 
@@ -184,15 +184,20 @@ public class Mundo {
 	}
 
 	public void deleteCurrent() {
+		List<ObjetoGrafico> todosObjetos = new ArrayList<>();
+		for (ObjetoGrafico og : objetos) {
+			todosObjetos.add(og);
+			todosObjetos.addAll(og.retornaDescendentes(og));
+		}
 		if(temSelecionado()) {
-			objetos.stream()
-		   		   .filter(s -> s.equals(selecionado))
-				   .findFirst()
-				   .ifPresent(selected -> {
-					  objetos.remove(selected);
-					  selected.deletaBBox();
-				   });
-		
+			todosObjetos.stream()
+				   		   .filter(s -> s.equals(selecionado))
+						   .findFirst()
+						   .ifPresent(selected -> {
+							  objetos.remove(selected);
+							  objetos.forEach(o -> o.procuraEDeleta(selected.getOID()));
+							  selected.deletaBBox();
+						   });
 		}
 	}
 }

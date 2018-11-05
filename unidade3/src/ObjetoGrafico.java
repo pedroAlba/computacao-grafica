@@ -1,7 +1,9 @@
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.TreeMap;
+import java.util.UUID;
 
 import javax.media.opengl.GL;
 
@@ -11,11 +13,12 @@ import javax.media.opengl.GL;
  */
 public class ObjetoGrafico {
 
+	private final String OID = UUID.randomUUID().toString();
+	
 	private List<Ponto4D> pontos = new ArrayList<>();
 	private List<ObjetoGrafico> filhos = new ArrayList<ObjetoGrafico>();
 	
-	private int primitiva;
-	
+	private int primitiva;	
 	private BoundingBox bbox;
 	
 	private int r, g, b, currentColor;
@@ -98,11 +101,6 @@ public class ObjetoGrafico {
 		return pontos;
 	}
 	
-	@Override
-	public String toString() {
-		return "Objeto Gráfico: " + pontos.toString() + "\n";
-	}
-
 	public void setPrimitiva(int primitiva) {
 		this.primitiva = primitiva;
 	}
@@ -289,7 +287,8 @@ public class ObjetoGrafico {
 		return transformou;
 	}
 	
-	public void setFilhos(ObjetoGrafico f) {
+	public void adicionaFilho(ObjetoGrafico f) {
+		System.out.printf("Adicionando filho %s ao objeto %s\n", f.getOID(), this.getOID());
 		filhos.add(f);
 	}
 	
@@ -305,5 +304,25 @@ public class ObjetoGrafico {
 		}
 		return retorno;
 	}
+
+	public String getOID() {
+		return OID;
+	}
+
+	public void procuraEDeleta(String oid2) {
+		
+		Optional<ObjetoGrafico> found = filhos.stream().filter(f -> f.getOID().equals(oid2)).findAny();
+		
+		if(found.isPresent()) {
+			filhos.remove(found.get());
+		}
+		
+		filhos.forEach(filho -> filho.procuraEDeleta(oid2));
+	}
 	
+
+	@Override
+	public String toString() {
+		return OID;
+	}
 }

@@ -91,7 +91,7 @@ public final class BoundingBox {
 	 */
 	public void desenharOpenGLBBox(GL gl) {
 		gl.glLineWidth(1.0f);
-		gl.glColor3f(1.0f, 1.0f, 0.0f);
+		gl.glColor3f(255, 0, 0);
 
 		gl.glEnable(GL.GL_LINE_STIPPLE);
 		gl.glBegin (GL.GL_LINE_LOOP);
