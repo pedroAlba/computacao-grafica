@@ -39,13 +39,7 @@ public class CanvasScreen extends Canvas{
 	gl.glShadeModel( GL.GL_SMOOTH );
         
         //carrega os objetos
-        loader[0] = new OBJModel("data/soccerball", 1.5f, gl, true);
-        loader[1] = new OBJModel("data/al", 1.5f, gl, true);
-        loader[2] = new OBJModel("data/f-16", 1.5f, gl, true);
-        loader[3] = new OBJModel("data/dolphins", 1.5f, gl, true);
-        loader[4] = new OBJModel("data/flowers", 1.5f, gl, true);
-        loader[5] = new OBJModel("data/porsche", 1.5f, gl, true);
-        loader[6] = new OBJModel("data/rose+vase", 1.5f, gl, true);
+        loader = new OBJModel("data/f-16", 1.5f, gl, true);
         
         //altera flag informando que jah carregou tudo que precisava
 //        frame.getCommand().setFirstDisplay(1);
@@ -114,8 +108,7 @@ public class CanvasScreen extends Canvas{
             gl.glRotatef(rot[0].getValue(), rot[1].getValue(), rot[2].getValue(), rot[3].getValue());
             gl.glScalef(sca[0].getValue(), sca[1].getValue(), sca[2].getValue());
             
-            loader[indexOBJ].draw(gl);
-
+            loader.draw(gl);
 
             gl.glFlush();
 //        }
@@ -185,7 +178,7 @@ public class CanvasScreen extends Canvas{
      * Retorna o modelo.
      */
     public OBJModel getModel() {        
-        return loader[indexOBJ];
+        return loader;
     }
     
     /**

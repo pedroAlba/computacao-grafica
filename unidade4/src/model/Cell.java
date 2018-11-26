@@ -48,7 +48,7 @@ public class Cell {
      */
     public void update(int update, int selection) {
         //verifica se esta célula é a selecionada pelo mouse
-        if(selection == id) {
+        //if(selection == id) {
             value += update * step;
             
             //verifica se não estourou os limites da célula
@@ -56,7 +56,7 @@ public class Cell {
                 value = min;
             else if (value > max) 
                 value = max;
-        }
+        //}
     }
     
     

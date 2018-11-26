@@ -36,13 +36,7 @@ public class CanvasWorld extends Canvas {
         gl.glClearColor(0.0f, 0.0f, 0.0f, 0.0f);  
         
         //carrega os objetos
-        loader[0] = new OBJModel("data/soccerball", 1.5f, gl, true);
-        loader[1] = new OBJModel("data/al", 1.5f, gl, true);
-        loader[2] = new OBJModel("data/f-16", 1.5f, gl, true);
-        loader[3] = new OBJModel("data/dolphins", 1.5f, gl, true);
-        loader[4] = new OBJModel("data/flowers", 1.5f, gl, true);
-        loader[5] = new OBJModel("data/porsche", 1.5f, gl, true);
-        loader[6] = new OBJModel("data/rose+vase", 1.5f, gl, true);
+        loader = new OBJModel("data/f-16", 1.5f, gl, true);
         
         //altera flag informando que jah carregou tudo que precisava
 //        frame.getCommand().setFirstDisplay(0);

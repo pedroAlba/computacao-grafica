@@ -46,7 +46,7 @@ public class Canvas implements GLEventListener, KeyListener, MouseWheelListener,
     //armazena um ponteiro para o popup deste componente
     protected PopupMenu popup;
     //armazena o modelo utilizado
-    protected OBJModel[] loader = new OBJModel[7];
+    protected OBJModel loader;
     //informa qual objeto esta sendo mostrado na tela
     protected int indexOBJ = 5;
     //informa as dimensões da tela

@@ -79,6 +79,7 @@ public class Frame extends JFrame{
                 canvasCommand.addGLEventListener(command);
                 canvasCommand.addMouseListener(command);
                 canvasCommand.addMouseMotionListener(command);
+                canvasCommand.addKeyListener(command);
                 canvasCommand.setBounds(22, 300, 534, 256);
                 
                 
@@ -153,18 +154,6 @@ public class Frame extends JFrame{
                 popupScreen.add(rose);
                 canvasScreen.add(popupScreen);
                 
-                
-                //popup do canvas world
-//                MenuItem toggle = new MenuItem("Toggle model");
-//                popupWorld.add(toggle);
-//                canvasWorld.add(popupWorld);
-                
-                
-                
-                /*
-                 *Cria os eventos para os menus dos popus
-                 */
-                
                 //cria os eventos para o popup do canvas de comando
                 transformation.addActionListener(new ActionListener() {
                     public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -219,72 +208,6 @@ public class Frame extends JFrame{
                         command.reset();
                     }            
                 });
-                
-                
-                quit.addActionListener(new ActionListener() {
-                    public void actionPerformed(java.awt.event.ActionEvent evt) {
-                        System.exit(0);
-                    }            
-                });
-                
-                
-                
-                
-                
-                //cria os eventos para o popup do canvas de comando
-                soccer.addActionListener(new ActionListener() {
-                    public void actionPerformed(java.awt.event.ActionEvent evt) {
-                        screen.loadModel(0);//soccerball
-                    }            
-                });
-                
-                al.addActionListener(new ActionListener() {
-                    public void actionPerformed(java.awt.event.ActionEvent evt) {
-                        screen.loadModel(1);//al capone
-                    }            
-                });
-                
-                jet.addActionListener(new ActionListener() {
-                    public void actionPerformed(java.awt.event.ActionEvent evt) {
-                        screen.loadModel(2);//f-16
-                    }            
-                });
-                
-                dolphis.addActionListener(new ActionListener() {
-                    public void actionPerformed(java.awt.event.ActionEvent evt) {
-                        screen.loadModel(3);//dolphins
-                    }            
-                });
-                
-                flower.addActionListener(new ActionListener() {
-                    public void actionPerformed(java.awt.event.ActionEvent evt) {
-                        screen.loadModel(4);//flowers
-                    }            
-                });
-                
-                porsche.addActionListener(new ActionListener() {
-                    public void actionPerformed(java.awt.event.ActionEvent evt) {
-                        screen.loadModel(5);//porsche
-                    }            
-                });
-                
-                rose.addActionListener(new ActionListener() {
-                    public void actionPerformed(java.awt.event.ActionEvent evt) {
-                        screen.loadModel(6);//rose
-                    }            
-                });
-                
-                
-                
-                //cria os eventos para o popup do canvas de mundo
-//                toggle.addActionListener(new ActionListener() {
-//                    public void actionPerformed(java.awt.event.ActionEvent evt) {
-//                        world.setWorldDraw();
-//                    }            
-//                });              
-                
-                
-//                first = false;
 	}
         
         /**

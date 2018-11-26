@@ -4,7 +4,11 @@ import model.Cell;
 import com.sun.opengl.util.GLUT;
 import java.awt.Component;
 import java.awt.PopupMenu;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
+
 import javax.media.opengl.DebugGL;
 import javax.media.opengl.GL;
 import javax.media.opengl.GLAutoDrawable;
@@ -35,6 +39,8 @@ public class CanvasCommand extends Canvas{
         glDrawable.setGL(new DebugGL(gl));
 
         gl.glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+        
+        reset();
     }
 
     public void display(GLAutoDrawable arg0) {
@@ -151,6 +157,7 @@ public class CanvasCommand extends Canvas{
                 }
 
 
+                System.out.println("loookat before draw" + lookat);
                 //desenha os parâmetros do lookat
                 cellDraw(lookat[0]);
                 cellDraw(lookat[1]);
@@ -207,14 +214,42 @@ public class CanvasCommand extends Canvas{
 //        }
     }
 
+    public void keyTyped(KeyEvent e) {
+
+   
+    	
+    	int currentX = (int) (lookat[3].getX() * 0.1);
+    	int currentY = (int) (lookat[3].getY() * 0.1);
+    	
+    	System.out.println("current x " + currentX);
+    	System.out.println("current y " + currentY);
+    	
+    	if(e.getKeyChar() == 'd') {
+    		lookat[3].update(currentX - 1, currentY - 1);	
+    	} else {
+    		lookat[3].update(currentX * -1, currentY * -1);
+    	}
+    	
+//    	Integer d = ThreadLocalRandom.current().nextInt(0,200);
+//    	Integer d1 = ThreadLocalRandom.current().nextInt(0,200);
+//    	System.out.println(d);
+//        lookat[3].update(lookat[3].getX() + d, lookat[3].getY() + d1);
+        glDrawable.display();
+        //atualiza o screen windows e world windows
+        frame.getScreen().getGLDrawable().display();
+    }
+    
     public void mousePressed(MouseEvent e) {
+    	
+    	System.out.println(e.getX());
+    	e.getY();
         if(MouseEvent.BUTTON1 == e.getButton()) {
             //inicializa a seleçao da célula
             selection = 0;
 
             //seleciona a célula que o mouse esta clicando
             if(type == PROJECTION) {
-                if(mode == PERSPECTIVE) {
+                if(mode == PERSPECTIVE) {                	
                     selection += perspective[0].hit(e.getX(), e.getY());
                     selection += perspective[1].hit(e.getX(), e.getY());
                     selection += perspective[2].hit(e.getX(), e.getY());
@@ -235,7 +270,7 @@ public class CanvasCommand extends Canvas{
                     selection += ortho[5].hit(e.getX(), e.getY());
                 }
 
-
+                System.out.println("caiu look at");
                 selection += lookat[0].hit(e.getX(), e.getY());
                 selection += lookat[1].hit(e.getX(), e.getY());
                 selection += lookat[2].hit(e.getX(), e.getY());
@@ -416,11 +451,11 @@ public class CanvasCommand extends Canvas{
      */
     public void reset() {
         if(type == PROJECTION) {
-            perspective[0].setValue(60.0f);
-            perspective[1].setValue(2.0f);
-            perspective[2].setValue(1.0f);
-            perspective[3].setValue(10.0f);
-            ortho[0].setValue(-2.0f);
+            perspective[0].setValue(48.0f);
+            perspective[1].setValue(1.8f);
+            perspective[2].setValue(0.6f);
+            perspective[3].setValue(6.6f);
+            ortho[0].setValue(0);
             ortho[1].setValue(2.0f);
             ortho[2].setValue(-1.0f);
             ortho[3].setValue(1.0f);
@@ -433,13 +468,13 @@ public class CanvasCommand extends Canvas{
             frustum[4].setValue(1.0f);
             frustum[5].setValue(3.5f);
             lookat[0].setValue(0.0f);
-            lookat[1].setValue(0.0f);
-            lookat[2].setValue(2.0f);
+            lookat[1].setValue(0.5f);
+            lookat[2].setValue(-2.2f);
             lookat[3].setValue(0.0f);
             lookat[4].setValue(0.0f);
-            lookat[5].setValue(0.0f);
+            lookat[5].setValue(4.8f);
             lookat[6].setValue(0.0f);
-            lookat[7].setValue(1.0f);
+            lookat[7].setValue(1.3f);
             lookat[8].setValue(0.0f);
         } else {
             translation[0].setValue(0.0f);
