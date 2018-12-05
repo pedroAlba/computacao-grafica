@@ -11,17 +11,19 @@ a display list (modelDispList), which is drawn by calls to
 draw().
 Information about the model is printed to stdout.
  */
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.StringTokenizer;
 
-
-import java.io.*;
-import java.util.*;
-import javax.media.opengl.*;
-import com.sun.opengl.util.*;
-import com.sun.opengl.util.texture.*;
+import javax.media.opengl.GL;
 
 
 public class OBJModel {
 
+    GL gl;
     private static final float DUMMY_Z_TC = -5.0F;
     // collection of vertices, normals and texture coords for the model
     private ArrayList<Tuple3> verts;
@@ -35,9 +37,23 @@ public class OBJModel {
     private ModelDimensions modelDims; // model dimensions
     private String modelNm; // without path or ".OBJ" extension
     private float maxSize; // for scaling the model
-    private int modelDispList; // the model's display list
+    protected int modelDispList; // the model's display list
+    
+    public Tuple3 tup(){
+        modelDims.reportDimensions();
+        return modelDims.getCenter();
+    }
 
+    /**
+     *
+     * @param nm
+     * @param sz
+     * @param gl
+     * @param showDetails
+     * @param gl
+     */
     public OBJModel(String nm, float sz, GL gl, boolean showDetails) {
+        this.gl = gl;
         modelNm = nm;
         maxSize = sz;
         initModelData(modelNm);
@@ -49,8 +65,9 @@ public class OBJModel {
         if (showDetails) {
             reportOnModel();
         }
+        
     } // end of OBJModel()
-
+    
     private void initModelData(String modelNm) {
         verts = new ArrayList<Tuple3>();
         normals = new ArrayList<Tuple3>();

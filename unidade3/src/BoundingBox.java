@@ -90,6 +90,7 @@ public final class BoundingBox {
 	 * @param gl
 	 */
 	public void desenharOpenGLBBox(GL gl) {
+		System.out.println("Comecou bbox");
 		gl.glLineWidth(1.0f);
 		gl.glColor3f(255, 0, 0);
 
@@ -119,6 +120,7 @@ public final class BoundingBox {
 	    	gl.glVertex3d (maiorX, maiorY, maiorZ);
 	    	gl.glVertex3d (maiorX, menorY, maiorZ);
     	gl.glEnd();
+    	System.out.println("Fim bbox");
 	}
 
 	public double obterMenorX() {
